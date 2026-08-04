@@ -2,6 +2,7 @@
   "framework": "vite",
   "routes": [
     { "handle": "filesystem" },
+    { "src": "/images/(.*)", "dest": "https://pshfjfewkbbgybevofio.supabase.co/storage/v1/object/public/site-media/images/$1" },
     { "src": "/.*", "dest": "/index.html" }
   ]
 }
