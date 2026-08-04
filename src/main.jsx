@@ -37,7 +37,7 @@ function Header() {
       <header className={`site-header site-header-home${lightHeader ? ' site-header-light' : ''}`}>
         <Logo />
         <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-navigation" aria-label={open ? 'Close navigation' : 'Open navigation'}>
-          <span className="menu-mark" aria-hidden="true"><i /><i /><i /><i /></span>
+          <span className="menu-mark" aria-hidden="true"><i /><i /></span>
         </button>
         <nav id="main-navigation" className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
           <a href="/#work-gate" onClick={() => setOpen(false)}>Work</a>
@@ -1132,12 +1132,12 @@ function SensoryHero() {
       position: 'center'
     },
     {
-      href: '/work/helios-social',
-      image: '/images/work/helios/social/render-01.jpg',
-      name: 'Helios Stone',
-      practice: 'Digital',
-      output: 'Strategy / Content / Social',
-      note: 'The scale and rarity of stone translated for the screen.',
+      href: '/work/social-battery',
+      image: '/images/social-battery/generated/hero-lineup.jpg',
+      name: 'Social Battery',
+      practice: 'Design',
+      output: 'Identity / Packaging / Brand world',
+      note: 'An energy drink built as a collectible power cell.',
       position: 'center'
     }
   ];
@@ -1164,7 +1164,9 @@ function SensoryHero() {
       distance: 0,
       frame: 0,
       lastTime: 0,
-      active: 0
+      active: 0,
+      wheelLockedUntil: 0,
+      leaving: false
     };
     motionRef.current = motion;
 
@@ -1232,9 +1234,8 @@ function SensoryHero() {
     };
 
     const select = index => {
-      const rounded = Math.round(motion.position);
-      const current = ((rounded % projects.length) + projects.length) % projects.length;
-      motion.desired = rounded + wrapDelta(index - current);
+      const target = Math.max(0, Math.min(projects.length - 1, index));
+      motion.desired = target;
       motion.velocity = 0;
       start();
     };
@@ -1262,7 +1263,7 @@ function SensoryHero() {
       const now = performance.now();
       const distance = event.clientX - motion.startX;
       const sensitivity = Math.max(170, stage.clientWidth * .24);
-      motion.position = motion.startPosition - distance / sensitivity;
+      motion.position = Math.max(0, Math.min(projects.length - 1, motion.startPosition - distance / sensitivity));
       const deltaTime = Math.max(8, now - motion.previousTime);
       motion.velocity = Math.max(-.032, Math.min(.032, (motion.position - motion.previousPosition) / deltaTime));
       motion.previousPosition = motion.position;
@@ -1276,16 +1277,34 @@ function SensoryHero() {
       motion.dragging = false;
       stage.classList.remove('is-dragging');
       if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
-      motion.desired = Math.round(motion.position + motion.velocity * 145);
+      motion.desired = Math.max(0, Math.min(projects.length - 1, Math.round(motion.position + motion.velocity * 145)));
       start();
     };
 
     const onWheel = event => {
-      event.preventDefault();
-      motion.desired = null;
       const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-      motion.velocity = Math.max(-.03, Math.min(.03, motion.velocity + delta / 6800));
-      start();
+      if (Math.abs(delta) < 5) return;
+      const direction = delta > 0 ? 1 : -1;
+      const current = Math.max(0, Math.min(projects.length - 1, Math.round(motion.desired ?? motion.position)));
+      const atEnd = direction > 0 && current === projects.length - 1;
+      const atStart = direction < 0 && current === 0;
+
+      if (atEnd) {
+        event.preventDefault();
+        if (!motion.leaving) {
+          motion.leaving = true;
+          document.getElementById('worlds-prelude')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          window.setTimeout(() => { motion.leaving = false; }, reduced ? 0 : 900);
+        }
+        return;
+      }
+      if (atStart) return;
+
+      event.preventDefault();
+      const now = performance.now();
+      if (now < motion.wheelLockedUntil) return;
+      motion.wheelLockedUntil = now + 320;
+      select(current + direction);
     };
 
     const onKeyDown = event => {
@@ -1328,7 +1347,7 @@ function SensoryHero() {
   const step = direction => motionRef.current?.select?.(activeIndex + direction);
 
   return (
-    <section className="work-carousel-hero" aria-labelledby="work-carousel-title">
+    <section className={`work-carousel-hero${activeIndex === projects.length - 1 ? ' is-at-end' : ''}`} aria-labelledby="work-carousel-title">
       <div className="work-carousel-heading">
         <p>Modern Day / Selected work</p>
         <h1 id="work-carousel-title">Be the company<br /><em>people remember.</em></h1>
@@ -1362,6 +1381,7 @@ function SensoryHero() {
         <a href={activeProject.href}>View project <Arrow /></a>
       </div>
       <div className="work-carousel-instruction"><span>Drag</span><i /><span>Scroll</span><i /><span>Arrow keys</span></div>
+      <a className="work-carousel-more" href="#work-gate">See more work <span aria-hidden="true">↓</span></a>
     </section>
   );
 }

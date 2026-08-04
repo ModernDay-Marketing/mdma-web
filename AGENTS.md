@@ -305,6 +305,7 @@ The hero is a full screen black glass exhibition beneath the dark homepage heade
 - The active project is centred, fully legible and framed in orange.
 - Adjacent projects recede around a visible circular orbit.
 - Project details and direct navigation occupy a separate footer rail.
+- The homepage selection includes Design Commune and Social Battery. Helios Stone is not part of the homepage carousel.
 - Mobile retains the same composition with a smaller headline, a touch sized active album and compact controls.
 - No copy may overlap the project artwork.
 
@@ -315,7 +316,9 @@ The carousel should feel like a physical media library, not an autoplaying galle
 - Pointer and touch dragging follow movement directly.
 - Release velocity creates inertia, friction and a spring settled snap.
 - Mouse wheel, trackpad, arrow keys and explicit previous and next controls are supported.
+- The wheel journey is finite. After the visitor reaches the final project, the next downward gesture moves into the page so the carousel never traps vertical scrolling.
 - Inactive albums can be selected directly. The active album opens its case study.
+- A visible “See more work” action takes visitors directly to the Design and Digital practice entrances.
 - Motion is implemented with lightweight DOM transforms and requestAnimationFrame. Do not move it to Three.js unless measured performance proves a need.
 - The animation loop stops after the carousel settles.
 - Reduced motion moves directly between settled states.
