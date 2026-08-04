@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+.vercel
+.env*
+
+# Large media & working artifacts — hosted in Supabase Storage, not git
+work/
+tmp/
+public/images/
+outputs/
+*.tar.gz

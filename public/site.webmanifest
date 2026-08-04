@@ -1,0 +1,16 @@
+{
+  "name": "Modern Day",
+  "short_name": "Modern Day",
+  "description": "An independent design and digital company in Hyderabad.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#efefeb",
+  "theme_color": "#efefeb",
+  "icons": [
+    {
+      "src": "/brand/modern-day-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
