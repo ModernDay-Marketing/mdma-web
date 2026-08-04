@@ -8,7 +8,8 @@
     "build": "vite build && mkdir -p dist/server dist/.openai && cp server/index.js dist/server/index.js && cp .openai/hosting.json dist/.openai/hosting.json",
     "preview": "vite preview",
     "seed:cms": "node scripts/seed-supabase.mjs",
-    "fetch:projects": "node scripts/fetch-project-catalog.mjs"
+    "fetch:projects": "node scripts/fetch-project-catalog.mjs",
+    "upload:storage": "node --env-file=.env.local scripts/upload-storage.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.111.0",
