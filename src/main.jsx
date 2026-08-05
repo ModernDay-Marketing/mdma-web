@@ -1165,21 +1165,23 @@ function SensoryHero() {
       frame: 0,
       lastTime: 0,
       active: 0,
-      wheelLockedUntil: 0,
-      leaving: false
+      wheelLockedUntil: 0
     };
     motionRef.current = motion;
 
-    const wrapDelta = value => {
-      const half = projects.length / 2;
-      return ((value + half) % projects.length + projects.length) % projects.length - half;
-    };
+    const clampIndex = value => Math.max(0, Math.min(projects.length - 1, value));
 
     const render = () => {
       const radius = Math.min(Math.max(stage.clientWidth * .42, 250), 620);
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
-        const delta = wrapDelta(index - motion.position);
+        const delta = index - motion.position;
+        if (Math.abs(delta) > 4) {
+          card.style.opacity = '0';
+          card.style.pointerEvents = 'none';
+          return;
+        }
+        card.style.pointerEvents = '';
         const angle = delta * .55;
         const x = Math.sin(angle) * radius;
         const z = (Math.cos(angle) - 1) * 360;
@@ -1190,7 +1192,7 @@ function SensoryHero() {
         card.style.opacity = `${Math.max(0, 1 - Math.abs(delta) * .82)}`;
         card.style.zIndex = `${100 - Math.round(Math.abs(delta) * 10)}`;
       });
-      const next = ((Math.round(motion.position) % projects.length) + projects.length) % projects.length;
+      const next = clampIndex(Math.round(motion.position));
       if (next !== motion.active) {
         motion.active = next;
         setActiveIndex(next);
@@ -1214,8 +1216,9 @@ function SensoryHero() {
         }
       } else {
         motion.position += motion.velocity * deltaTime;
+        motion.position = clampIndex(motion.position);
         motion.velocity *= Math.exp(-.0075 * deltaTime);
-        if (Math.abs(motion.velocity) < .00045) motion.desired = Math.round(motion.position);
+        if (Math.abs(motion.velocity) < .00045) motion.desired = clampIndex(Math.round(motion.position));
       }
       render();
       motion.frame = requestAnimationFrame(animate);
@@ -1234,8 +1237,7 @@ function SensoryHero() {
     };
 
     const select = index => {
-      const target = Math.max(0, Math.min(projects.length - 1, index));
-      motion.desired = target;
+      motion.desired = clampIndex(index);
       motion.velocity = 0;
       start();
     };
@@ -1263,7 +1265,7 @@ function SensoryHero() {
       const now = performance.now();
       const distance = event.clientX - motion.startX;
       const sensitivity = Math.max(170, stage.clientWidth * .24);
-      motion.position = Math.max(0, Math.min(projects.length - 1, motion.startPosition - distance / sensitivity));
+      motion.position = clampIndex(motion.startPosition - distance / sensitivity);
       const deltaTime = Math.max(8, now - motion.previousTime);
       motion.velocity = Math.max(-.032, Math.min(.032, (motion.position - motion.previousPosition) / deltaTime));
       motion.previousPosition = motion.position;
@@ -1277,7 +1279,7 @@ function SensoryHero() {
       motion.dragging = false;
       stage.classList.remove('is-dragging');
       if (stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
-      motion.desired = Math.max(0, Math.min(projects.length - 1, Math.round(motion.position + motion.velocity * 145)));
+      motion.desired = clampIndex(Math.round(motion.position + motion.velocity * 145));
       start();
     };
 
@@ -1285,20 +1287,11 @@ function SensoryHero() {
       const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
       if (Math.abs(delta) < 5) return;
       const direction = delta > 0 ? 1 : -1;
-      const current = Math.max(0, Math.min(projects.length - 1, Math.round(motion.desired ?? motion.position)));
-      const atEnd = direction > 0 && current === projects.length - 1;
-      const atStart = direction < 0 && current === 0;
+      const current = clampIndex(Math.round(motion.desired ?? motion.position));
+      const atEnd = direction > 0 && current >= projects.length - 1;
+      const atStart = direction < 0 && current <= 0;
 
-      if (atEnd) {
-        event.preventDefault();
-        if (!motion.leaving) {
-          motion.leaving = true;
-          document.getElementById('worlds-prelude')?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-          window.setTimeout(() => { motion.leaving = false; }, reduced ? 0 : 900);
-        }
-        return;
-      }
-      if (atStart) return;
+      if (atEnd || atStart) return;
 
       event.preventDefault();
       const now = performance.now();
@@ -1372,9 +1365,9 @@ function SensoryHero() {
       </div>
       <div className="work-carousel-detail" aria-live="polite">
         <div className="work-carousel-controls">
-          <button type="button" onClick={() => step(-1)} aria-label="Previous project">←</button>
+          <button type="button" onClick={() => step(-1)} disabled={activeIndex === 0} aria-label="Previous project">←</button>
           <span>{String(activeIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
-          <button type="button" onClick={() => step(1)} aria-label="Next project">→</button>
+          <button type="button" onClick={() => step(1)} disabled={activeIndex === projects.length - 1} aria-label="Next project">→</button>
         </div>
         <div className="work-carousel-project"><span>{activeProject.output}</span><strong>{activeProject.name}</strong></div>
         <p>{activeProject.note}</p>

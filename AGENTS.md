@@ -7,7 +7,7 @@
 **Original website domain:** https://www.modernday.in
 **Canonical SEO domain:** https://moderndaymarketingagency.com
 **Secondary deployment:** https://modern-day-hyderabad.dharmateja29.chatgpt.site  
-**Last major design review:** 31 July 2026  
+**Last major design review:** 5 August 2026
 **Review cadence:** Update this file whenever a material design, writing, architecture, CMS, or deployment decision changes.
 
 This is the governing source of truth for all future work on the Modern Day website. Read it before changing the site. Preserve the decisions below unless Dharma explicitly changes them.
@@ -91,25 +91,11 @@ Text must have its own clear territory. Do not place large copy over a model, im
 
 Specific rules:
 
-- Large display type must use a line height that contains the actual glyphs.
-- For the homepage gateway titles, keep line height at `0.88` or more.
-- Supporting sentences must have a deliberate gap after display titles.
-- Test at wide laptop and desktop sizes where viewport based type can become unexpectedly large.
+- Headers and body text must each keep clear territory. Do not layer text over models, images, faces, products, or other text.
+- Supporting sentences must have a deliberate gap after headers.
 - Do not solve collisions by hiding meaningful copy on desktop.
 - On mobile, stack the visual, controls, and copy instead of layering them.
-
-The overlap visible in the July 2026 Digital gateway screenshot is a known failure mode. It was caused by a `0.72` title line height paired with a very large capped font size. The corrected title rule is:
-
-```css
-.home-wing-card h2 {
-  margin: 32px 0 34px;
-  font-size: clamp(84px, 10.5vw, 170px);
-  line-height: .88;
-  letter-spacing: -.095em;
-}
-```
-
-Do not regress this.
+- Do not reintroduce oversized display type to fill empty space.
 
 ---
 
@@ -223,26 +209,31 @@ The global tokens are defined at the top of `src/styles.css`.
 | `--panel` | `#dfe0da` | Secondary neutral panels |
 | `--signal` | `#ec5b32` | Orange action and meaning signal |
 | `--acid` | `#c7dd3d` | Digital wing and high energy surfaces |
+| `--type-header` | `28px` | All headings and title level text |
+| `--type-body` | `16px` | All reading text, UI chrome, and labels |
 
 Do not add a new global color without documenting why the existing tokens cannot perform the job.
+Do not add a third type size. Hierarchy comes from weight, color, spacing, and structure.
 
 ### 4.2 Typography
 
-| Role | Typeface | Typical use |
-|---|---|---|
-| Display and body | Manrope | Headlines, body copy, navigation, buttons |
-| Utility | DM Mono | Labels, metadata, categories, system language, captions |
+| Role | Typeface | Size token | Typical use |
+|---|---|---|---|
+| Header | Manrope | `--type-header` (`28px`) | Page titles, section headings, exhibition titles |
+| Body | Manrope | `--type-body` (`16px`) | Paragraphs, navigation, buttons, captions, labels |
+| Utility face | DM Mono | `--type-body` | Labels, metadata, categories, system language (same size as body) |
 
 Fonts load through Google Fonts in `index.html`.
 
+The site uses exactly two font sizes. Do not reintroduce museum scale display type, viewport based headline clamps, or additional intermediate sizes.
+
 Typography behavior:
 
-- Display type uses tight tracking and compact line height.
-- Body copy must remain comfortable and readable.
-- Utility text is uppercase, small, and sparse.
+- Headers use `--type-header` with comfortable line height around `1.15` and light tracking around `-0.03em`.
+- Body copy uses `--type-body` with readable line height around `1.55`.
+- Utility text may stay uppercase and mono, but must use `--type-body`, not a third size.
 - Do not use mono text for paragraphs.
-- Do not reduce mobile utility copy below practical readability.
-- Large type is allowed only when the containing layout reserves enough space.
+- Do not solve hierarchy with bigger type. Use weight, color, spacing, and structure instead.
 
 ### 4.3 Borders and shapes
 
@@ -844,7 +835,7 @@ Required visual checks before publishing:
 
 | Viewport | Purpose |
 |---|---|
-| 1920 by 1080 | Detect viewport based display type collisions and wide layout gaps |
+| 1920 by 1080 | Detect text collisions and wide layout gaps |
 | 1440 by 900 | Standard desktop composition |
 | 1024 by 768 | Tablet and compact laptop behavior |
 | 390 by 844 | Current mobile baseline |
@@ -1006,7 +997,7 @@ Update this playbook if a new permanent rule was established
 - Use the supplied Modern Day logo.
 - Verify every public claim.
 - Keep “Choose an entrance.”
-- Test at 1920 by 1080 before publishing large display type.
+- Test at 1920 by 1080 before publishing type or layout changes.
 - Update this file when a permanent decision changes.
 
 ### Do not
@@ -1015,7 +1006,7 @@ Update this playbook if a new permanent rule was established
 - Do not use a generic agency template.
 - Do not create a generic CMS form for new case studies.
 - Do not put large text over important visuals.
-- Do not allow display type to collide with supporting copy.
+- Do not allow headers to collide with supporting copy.
 - Do not use forced interface language.
 - Do not restore “Move through the system.”
 - Do not overuse hyphens or dash punctuation in visible copy.
