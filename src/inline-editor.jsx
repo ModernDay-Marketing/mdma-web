@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { publicAssetUrl, supabase } from './supabase';
+import { getSupabase, publicAssetUrl } from './supabase';
 
 const editableProjects = [
   { slug: 'egg-break', title: 'EggBreak' },
@@ -17,10 +17,14 @@ export default function CaseEditBar({ slug, record, gallery }) {
   const media = useRef([]);
 
   useEffect(() => {
-    if (!supabase) return;
-    supabase.auth.getSession().then(({ data }) => setSession(data.session));
-    const { data } = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
-    return () => data.subscription.unsubscribe();
+    let unsubscribe = () => {};
+    getSupabase().then(supabase => {
+      if (!supabase) return;
+      supabase.auth.getSession().then(({ data }) => setSession(data.session));
+      const { data } = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
+      unsubscribe = () => data.subscription.unsubscribe();
+    });
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -63,7 +67,8 @@ export default function CaseEditBar({ slug, record, gallery }) {
         setMessage('Uploading image…');
         const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, '-');
         const path = `${slug}/${Date.now()}-${safeName}`;
-        const { error } = await supabase.storage.from('case-study-images').upload(path, file, {
+        const client = await getSupabase();
+        const { error } = await client.storage.from('case-study-images').upload(path, file, {
           cacheControl: '31536000',
           contentType: file.type
         });
@@ -110,7 +115,8 @@ export default function CaseEditBar({ slug, record, gallery }) {
       gallery: savedGallery,
       updated_at: new Date().toISOString()
     };
-    const { error } = await supabase.from('case_studies').upsert(payload, { onConflict: 'slug' });
+    const client = await getSupabase();
+    const { error } = await client.from('case_studies').upsert(payload, { onConflict: 'slug' });
     setBusy(false);
     setMessage(error ? error.message : 'Published.');
   }
@@ -123,7 +129,7 @@ export default function CaseEditBar({ slug, record, gallery }) {
       </select>
       <a href="/studio">Projects</a>
       <button onClick={save} disabled={busy}>{busy ? 'Working…' : 'Save changes'}</button>
-      <button className="inline-signout" onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}>Sign out</button>
+      <button className="inline-signout" onClick={async () => { const client = await getSupabase(); await client.auth.signOut(); window.location.href = '/'; }}>Sign out</button>
     </aside>
   );
 }

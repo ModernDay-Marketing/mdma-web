@@ -345,7 +345,9 @@ The next full viewport contains exactly two direct entrances:
 - Design: “Build the world.” Links to `/work/design`.
 - Digital: “Move the market.” Links to `/work/digital`.
 
-The entrances retain equal columns on mobile and desktop. Do not collapse the animated hero, majestic transition, and entrances into one average card layout.
+The choice banner uses the approved line “Choose an entrance.” Each door includes a clear Enter Design or Enter Digital action with light arrival and hover motion. The entrances retain equal columns on mobile and desktop. Do not collapse the animated hero, majestic transition, and entrances into one average card layout.
+
+Homepage carousel covers live in `public/home-albums` as compact WebP assets. Do not point the homepage carousel at full case study heroes.
 
 ---
 

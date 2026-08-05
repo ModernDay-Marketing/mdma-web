@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { isSupabaseConfigured, supabase } from './supabase';
+import { getSupabase, isSupabaseConfigured } from './supabase';
 import projectCatalog from './project-catalog.json';
 import { applyProjectCopy } from './project-copy';
 
@@ -32,6 +32,7 @@ function Login() {
   async function submit(event) {
     event.preventDefault();
     setBusy(true);
+    const supabase = await getSupabase();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
     if (error) setMessage(error.message);
@@ -61,13 +62,17 @@ export default function Studio() {
   const [busySlug, setBusySlug] = useState('');
 
   useEffect(() => {
-    if (!supabase) return setLoading(false);
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setLoading(false);
+    let unsubscribe = () => {};
+    getSupabase().then(supabase => {
+      if (!supabase) return setLoading(false);
+      supabase.auth.getSession().then(({ data }) => {
+        setSession(data.session);
+        setLoading(false);
+      });
+      const { data } = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
+      unsubscribe = () => data.subscription.unsubscribe();
     });
-    const { data } = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
-    return () => data.subscription.unsubscribe();
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -75,6 +80,7 @@ export default function Studio() {
     let active = true;
     async function syncProjects() {
       setMessage('Syncing projects with Supabase…');
+      const supabase = await getSupabase();
       const rows = allProjects.map(project => ({
         slug: project.slug,
         title: project.title,
@@ -101,6 +107,7 @@ export default function Studio() {
     if (status === 'draft' && !window.confirm(`Delete ${project.title} from the website? You can restore it later from Studio.`)) return;
     setBusySlug(project.slug);
     setMessage(status === 'draft' ? `Deleting ${project.title}…` : `Restoring ${project.title}…`);
+    const supabase = await getSupabase();
     const { error } = await supabase.from('case_studies').update({ status, updated_at: new Date().toISOString() }).eq('slug', project.slug);
     setBusySlug('');
     if (error) return setMessage(error.message);
@@ -118,7 +125,7 @@ export default function Studio() {
 
   return (
     <main className="studio-launcher">
-      <header><div className="studio-mark"><img src="/brand/modern-day-logo.png" alt="Modern Day" width="647" height="348" /><small>Studio</small></div><button onClick={() => supabase.auth.signOut()}>Sign out</button></header>
+      <header><div className="studio-mark"><img src="/brand/modern-day-logo.png" alt="Modern Day" width="647" height="348" /><small>Studio</small></div><button onClick={async () => { const supabase = await getSupabase(); await supabase.auth.signOut(); }}>Sign out</button></header>
       <section className="studio-project-manager">
         <p>Supabase project manager</p>
         <h1>All projects.</h1>
