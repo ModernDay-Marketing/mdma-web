@@ -1065,3 +1065,7 @@ Before approving any page, ask:
 > Does this feel like a carefully curated Modern Day exhibition, or does it feel like another agency website?
 
 If the answer is “another agency website,” the work is not finished.
+
+Pricing navigation uses a sticky chapter rail with scope descriptions and an orange active section indicator. On narrow screens the rail scrolls horizontally, keeping the active chapter visible.
+
+The shared closing contact section gives “Modern problems need” and “Modern Day thinking.” the full content width, with comfortable line height. A separate lower row pairs a short invitation with the contact action. Do not return to the narrow headline column or forced single word lines.

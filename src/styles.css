@@ -4132,3 +4132,18 @@ body.cms-editing { padding-top: 64px; }
 /* Owner supplied founder portrait: preserve natural colour and keep the face in view. */
 .founder-door figure img[src="/portraits/dharma-teja-window-light.jpg"],
 .founder-hero-image img[src="/portraits/dharma-teja-window-light.jpg"] { object-position:50% 42%; filter:none; }
+
+/* A full width closing statement with a separate invitation below. */
+.contact-band.home-contact-band { padding-top:clamp(56px,7vw,110px) !important; padding-bottom:clamp(56px,7vw,110px) !important; }
+.contact-band.home-contact-band>.section-label { margin:0 0 48px; max-width:none; font:12px/1.5 'DM Mono',monospace; letter-spacing:.04em; text-transform:uppercase; }
+.contact-band.home-contact-band>h2 { font-size:clamp(40px,6.4vw,104px); line-height:1.08; letter-spacing:-.06em; margin:0; font-weight:500; }
+.contact-band.home-contact-band>h2>span { display:block; }
+.contact-band.home-contact-band>.contact-band-invitation { margin-top:64px; padding-top:28px; border-top:1px solid rgba(24,26,23,.4); display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:8vw; }
+.contact-band-invitation p { margin:0; font-size:clamp(16px,1.4vw,20px); line-height:1.6; }
+.contact-band.home-contact-band .contact-band-invitation a { font-size:clamp(20px,2vw,28px); padding:12px 0; border-bottom:1px solid var(--ink); gap:20px; }
+@media(max-width:620px) {
+  .contact-band.home-contact-band>.section-label { margin-bottom:32px; }
+  .contact-band.home-contact-band>h2 { font-size:clamp(36px,9.2vw,56px); line-height:1.1; }
+  .contact-band.home-contact-band>h2>span+span { margin-top:12px; }
+  .contact-band.home-contact-band>.contact-band-invitation { margin-top:36px; grid-template-columns:1fr; gap:28px; }
+}

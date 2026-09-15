@@ -86,3 +86,32 @@
 
 .fees-social { background:var(--acid); --line:rgba(24,26,23,.35); }
 .fees-social .fees-website-preview { border-color:var(--line); }
+
+/* A persistent chapter rail makes each practice and the current section clear. */
+.fees-nav { position:sticky; top:0; z-index:20; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:0; padding:0 var(--fees-edge); background:var(--ink); color:var(--paper); border-bottom:1px solid #3c3e37; }
+.fees-nav a { position:relative; min-width:0; padding:25px 24px 26px; border-left:1px solid #3c3e37; transition:background .2s,color .2s; }
+.fees-nav a:first-child { border-left:0; padding-left:0; }
+.fees-nav a:last-child { grid-column:auto; padding-right:0; }
+.fees-nav-title { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:clamp(15px,1.5vw,22px); font-weight:500; letter-spacing:-.025em; }
+.fees-nav-title>span { color:#999d91; font-size:18px; }
+.fees-nav-detail { display:block; margin-top:8px; color:#b6b9ae; font-size:11px; line-height:1.5; }
+.fees-nav a::after { content:''; position:absolute; bottom:0; left:24px; right:24px; height:3px; background:transparent; }
+.fees-nav a:first-child::after { left:0; }
+.fees-nav a:last-child::after { right:0; }
+.fees-nav a[aria-current] { color:var(--signal); }
+.fees-nav a[aria-current]::after { background:var(--signal); }
+.fees-nav a[aria-current] .fees-nav-title>span { color:var(--signal); }
+.fees-nav a:hover { color:var(--paper); background:#242720; }
+.fees-nav a:focus-visible { outline-offset:-5px; }
+.fees-page section[id] { scroll-margin-top:145px; }
+@media(max-width:900px) {
+  .fees-nav { display:flex; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; scrollbar-color:var(--signal) var(--ink); }
+  .fees-nav a { flex:0 0 180px; padding:18px 20px 20px; }
+  .fees-nav a:first-child { padding-left:0; flex-basis:160px; }
+  .fees-nav a:last-child { padding-right:20px; }
+  .fees-nav-title { font-size:17px; }
+  .fees-nav-detail { font-size:11px; }
+  .fees-page section[id] { scroll-margin-top:125px; }
+}
+
+html:has(.fees-page), body:has(.fees-page), #root:has(.fees-page), .fees-page>main { overflow-x:clip; overflow-y:visible; }

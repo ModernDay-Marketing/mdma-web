@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './pricing-page.css';
 
 const designFees = [
@@ -20,6 +20,54 @@ function FeeRow({ name, price, copy, includes, scope, unit }) {
   </article>;
 }
 
+const feeSections = [
+  { id: 'design-fees', title: 'Design', detail: 'Identity and packaging' },
+  { id: 'website-fees', title: 'Websites', detail: 'Design and development' },
+  { id: 'digital-fees', title: 'Digital', detail: 'Social media partnerships' },
+  { id: 'production-fees', title: 'Production', detail: 'Photography and film' },
+  { id: 'working-together', title: 'Before we begin', detail: 'Scope and next steps' },
+];
+
+function FeeNavigation() {
+  const [active, setActive] = useState('design-fees');
+  const nav = useRef(null);
+  useEffect(() => {
+    let frame;
+    const update = () => {
+      const threshold = (nav.current?.offsetHeight || 100) + 48;
+      let current = feeSections[0].id;
+      for (const section of feeSections) {
+        if (document.getElementById(section.id)?.getBoundingClientRect().top <= threshold) current = section.id;
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+  useEffect(() => {
+    const link = nav.current?.querySelector('[aria-current]');
+    if (link && nav.current.scrollWidth > nav.current.clientWidth) {
+      nav.current.scrollTo({ left: link.offsetLeft - nav.current.offsetLeft - 22, behavior: 'instant' });
+    }
+  }, [active]);
+  return <nav ref={nav} className="fees-nav" aria-label="Fee guide sections">
+    {feeSections.map(section => <a key={section.id} href={`#${section.id}`} aria-current={active === section.id ? 'location' : undefined}>
+      <span className="fees-nav-title">{section.title}<span aria-hidden="true">↘</span></span>
+      <span className="fees-nav-detail">{section.detail}</span>
+    </a>)}
+  </nav>;
+}
+
 export default function PricingPage({ Seo }) {
   return <div className="fees-page">
     <Seo title="Pricing | Modern Day Design, Social Media and Production" description="Explore Modern Day fees for logo design, complete branding, packaging, website building, monthly social media and photography or film shoots. Understand the scope behind each fee." path="/pricing" />
@@ -36,7 +84,7 @@ export default function PricingPage({ Seo }) {
         <div className="fees-hero-bottom"><p>Give your company a distinct identity.<br />Build the presence to make it matter.<br />Here is what working together looks like.</p><a href="#design-fees">Explore the fees <span aria-hidden="true">↓</span></a></div>
       </section>
 
-      <nav className="fees-nav" aria-label="Fee guide sections"><a href="#design-fees">Design</a><a href="#website-fees">Websites</a><a href="#digital-fees">Digital</a><a href="#production-fees">Production</a><a href="#working-together">Before we begin</a></nav>
+      <FeeNavigation />
 
       <section className="fees-chapter" id="design-fees">
         <header className="fees-chapter-heading"><span className="fees-label">Design</span><h2>A brand.<br />A whole world.</h2><p>From the first mark to the system around it. Build a company people can recognise wherever they meet it.</p><a className="fees-website-preview" href="/work/sleeping-tiger"><img src="/website-examples/sleeping-tiger.jpg" alt="Sleeping Tiger identity case study with a blue tiger illustration and an orange and blue visual system" width="1280" height="800" loading="lazy" /><span>Enter the world of Sleeping Tiger <span aria-hidden="true">↗</span></span></a></header>

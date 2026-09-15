@@ -2043,7 +2043,8 @@ function ContactBand() {
   return (
     <section className="contact-band home-contact-band">
       <p className="section-label">A Modern Day point of view</p>
-      <div><h2>Modern<br />problems need<br />Modern Day<br />thinking.</h2><a href="/contact">Start a conversation <Arrow /></a></div>
+      <h2><span>Modern problems need</span><span>Modern Day thinking.</span></h2>
+      <div className="contact-band-invitation"><p>Tell us what you want to change.<br />Let’s give your business its next direction.</p><a href="/contact">Start a conversation <Arrow /></a></div>
     </section>
   );
 }
