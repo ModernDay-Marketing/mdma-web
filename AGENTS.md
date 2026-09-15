@@ -1069,3 +1069,5 @@ If the answer is “another agency website,” the work is not finished.
 Pricing navigation uses a sticky chapter rail with scope descriptions and an orange active section indicator. On narrow screens the rail scrolls horizontally, keeping the active chapter visible.
 
 The shared closing contact section gives “Modern problems need” and “Modern Day thinking.” the full content width, with comfortable line height. A separate lower row pairs a short invitation with the contact action. Do not return to the narrow headline column or forced single word lines.
+
+The founder social closing uses a full width two line headline with line height at least 1.08. Social and contact links sit below, in three columns on desktop and stacked rows on mobile. Profile labels use readable 13px type and light grey contrast on the dark surface.
