@@ -2436,7 +2436,7 @@ function AboutPage() {
         </section>
         <section className="founder-door">
           <figure>
-            <img src="/images/founder/dharma-teja-portrait.jpg" alt="Dharma Teja, founder of Modern Day, standing in a red gallery space" loading="lazy" />
+            <img src="/portraits/dharma-teja-window-light.jpg" alt="Dharma Teja, founder of Modern Day, smiling beside a window in natural light" loading="lazy" />
             <figcaption><span>Founder / Creative Director</span><span>Hyderabad, India</span></figcaption>
           </figure>
           <div>
@@ -2519,7 +2519,7 @@ function FounderPage() {
             </div>
           </div>
           <figure className="founder-hero-image founder-photo">
-            <img src="/images/founder/dharma-teja-portrait.jpg" alt="Dharma Teja, founder of Modern Day, standing in a red gallery space" width="512" height="640" />
+            <img src="/portraits/dharma-teja-window-light.jpg" alt="Dharma Teja, founder of Modern Day, smiling beside a window in natural light" width="1125" height="2000" />
             <figcaption><span>Frame 01 / The storyteller</span><span>Portrait from @mr.dharmateja</span></figcaption>
           </figure>
         </section>

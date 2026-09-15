@@ -39,7 +39,7 @@ export default function PricingPage({ Seo }) {
       <nav className="fees-nav" aria-label="Fee guide sections"><a href="#design-fees">Design</a><a href="#website-fees">Websites</a><a href="#digital-fees">Digital</a><a href="#production-fees">Production</a><a href="#working-together">Before we begin</a></nav>
 
       <section className="fees-chapter" id="design-fees">
-        <header className="fees-chapter-heading"><span className="fees-label">Design</span><h2>A brand.<br />A whole world.</h2><p>From the first mark to the system around it. Build a company people can recognise wherever they meet it.</p><a className="fees-evidence" href="/work/sleeping-tiger">Enter the world of Sleeping Tiger <span aria-hidden="true">↗</span></a></header>
+        <header className="fees-chapter-heading"><span className="fees-label">Design</span><h2>A brand.<br />A whole world.</h2><p>From the first mark to the system around it. Build a company people can recognise wherever they meet it.</p><a className="fees-website-preview" href="/work/sleeping-tiger"><img src="/website-examples/sleeping-tiger.jpg" alt="Sleeping Tiger identity case study with a blue tiger illustration and an orange and blue visual system" width="1280" height="800" loading="lazy" /><span>Enter the world of Sleeping Tiger <span aria-hidden="true">↗</span></span></a></header>
         <div>{designFees.map(fee => <FeeRow key={fee.name} {...fee} unit={fee.name === 'Complete branding' ? 'Indicative project fee' : 'Per project'} />)}</div>
       </section>
 
@@ -54,16 +54,15 @@ export default function PricingPage({ Seo }) {
         </div>
       </section>
 
-      <section className="fees-digital" id="digital-fees">
-        <div className="fees-digital-heading"><span className="fees-label">Digital / Social media</span><h2>Your entire presence.<br />Considered.</h2><p>How you look. What you say. Why anyone should care. We connect it all, so your company shows up with purpose wherever your audience meets it.</p></div>
-        <div className="fees-retainer"><div><h3>Social media partnership</h3><strong>₹80,000 to ₹3,00,000</strong><span>Per month / Scope shaped around your business</span></div><p>A connected programme of strategy, creative direction and execution. The fee reflects the channels, production needs and level of involvement your business requires.</p></div>
-        <div className="fees-digital-scope">
-          <article><h3>A clear point of view</h3><p>We clarify who you need to reach, what you want to be known for and how your brand should sound. That direction becomes the basis for the content plan.</p></article>
-          <article><h3>A presence that belongs together</h3><p>We shape profile presentation, visual direction, writing and design across the agreed channels. Every expression should feel like it comes from the same company.</p></article>
-          <article><h3>Ideas with impact</h3><p>We develop campaign ideas, founder stories and product or service narratives, then plan the content needed to bring them to life. Production is agreed as part of the scope.</p></article>
-          <article><h3>Direction that keeps improving</h3><p>We manage the agreed publishing rhythm, coordinate content and approvals, and review performance. Audience response informs the next round of ideas and community priorities.</p></article>
+      <section className="fees-chapter fees-social" id="digital-fees">
+        <header className="fees-chapter-heading"><span className="fees-label">Digital / Social media</span><h2>Your entire<br />presence.<br />Considered.</h2><p>How you look. What you say. Why anyone should care. We connect it all, so your company shows up with purpose wherever your audience meets it.</p>
+          <a className="fees-website-preview" href="/work/dat-social"><img src="/website-examples/dat.jpg" alt="DAT digital case study showing its spatial technology content and visual direction" width="1280" height="800" loading="lazy" /><span>Explore DAT’s digital presence <span aria-hidden="true">↗</span></span></a>
+        </header>
+        <div>
+          <FeeRow name="Social media partnership" price="₹80,000 to ₹3,00,000" unit="Per month" copy="A connected programme of strategy, creative direction and execution. We shape the scope around the presence your business needs to build." />
+          <div className="fees-website-scope"><h3>At ₹80,000: give your presence direction.</h3><p>A focused monthly engagement built around a clear point of view, a consistent visual language and a purposeful publishing rhythm across the agreed channels.</p><ul className="fees-includes"><li>Audience understanding, positioning and a voice that gives people a reason to listen.</li><li>Content planning, writing and design that make each appearance feel like the same company.</li><li>Coordination of content and approvals, agreed publishing responsibilities and performance review.</li></ul></div>
+          <div className="fees-website-scope"><h3>More ambition. A deeper partnership.</h3><p>The fee grows towards ₹3,00,000 as the work expands across channels, campaign activity, founder stories and production needs. More involvement gives the business a broader, more connected presence.</p><p className="fees-scope">We agree the channels, content rhythm, community responsibilities, shoot days and editing upfront. Ad spend and other production costs are confirmed in the proposal. The work is shaped around your goals.</p></div>
         </div>
-        <div className="fees-digital-foot"><p>The monthly fee grows with the number of channels, campaign activity, production needs and depth of involvement. We agree those responsibilities upfront, then choose the formats that serve the work.</p><a className="fees-evidence" href="/work/dat-social">Explore DAT’s digital presence <span aria-hidden="true">↗</span></a></div>
       </section>
 
       <section className="fees-chapter" id="production-fees">

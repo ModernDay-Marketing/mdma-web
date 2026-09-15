@@ -4128,3 +4128,7 @@ body.cms-editing { padding-top: 64px; }
 
 /* Keep the practice switch on the edge of the viewport at every size. */
 @media(max-width:620px){.wing-switch-tab{top:50%;right:0;bottom:auto;transform:translateY(-50%);min-height:154px;max-width:none;padding:14px 10px;border-right:0;flex-direction:column;gap:0;white-space:normal;font-size:8px}.wing-switch-tab span{writing-mode:vertical-rl;transform:rotate(180deg)}}
+
+/* Owner supplied founder portrait: preserve natural colour and keep the face in view. */
+.founder-door figure img[src="/portraits/dharma-teja-window-light.jpg"],
+.founder-hero-image img[src="/portraits/dharma-teja-window-light.jpg"] { object-position:50% 42%; filter:none; }

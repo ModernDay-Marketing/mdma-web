@@ -83,3 +83,6 @@
 .fees-website-scope p { margin-top:16px; font-size:16px; max-width:620px; }
 .fees-website-scope p.fees-scope { font-size:13px; }
 @media(max-width:620px) { .fees-nav { display:grid; grid-template-columns:repeat(3,1fr); gap:0 16px; } .fees-nav a { padding:14px 0; } .fees-nav a:last-child { grid-column:span 2; } .fees-website-scope h3 { font-size:21px; } }
+
+.fees-social { background:var(--acid); --line:rgba(24,26,23,.35); }
+.fees-social .fees-website-preview { border-color:var(--line); }
