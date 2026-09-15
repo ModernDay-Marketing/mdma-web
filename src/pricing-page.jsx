@@ -22,7 +22,7 @@ function FeeRow({ name, price, copy, includes, scope, unit }) {
 
 export default function PricingPage({ Seo }) {
   return <div className="fees-page">
-    <Seo title="Pricing | Modern Day Design, Social Media and Production" description="Explore Modern Day fees for logo design, complete branding, packaging, monthly social media and photography or film shoots. Understand the scope behind each fee." path="/pricing" />
+    <Seo title="Pricing | Modern Day Design, Social Media and Production" description="Explore Modern Day fees for logo design, complete branding, packaging, website building, monthly social media and photography or film shoots. Understand the scope behind each fee." path="/pricing" />
     <a className="fees-skip" href="#fees-main">Skip to fee guide</a>
     <header className="fees-header">
       <a href="/" aria-label="Modern Day home"><img src="/brand/modern-day-marketing-agency-transparent.png" width="2600" height="830" alt="Modern Day Marketing Agency" /></a>
@@ -36,11 +36,22 @@ export default function PricingPage({ Seo }) {
         <div className="fees-hero-bottom"><p>Give your company a distinct identity.<br />Build the presence to make it matter.<br />Here is what working together looks like.</p><a href="#design-fees">Explore the fees <span aria-hidden="true">↓</span></a></div>
       </section>
 
-      <nav className="fees-nav" aria-label="Fee guide sections"><a href="#design-fees">Design</a><a href="#digital-fees">Digital</a><a href="#production-fees">Production</a><a href="#working-together">Before we begin</a></nav>
+      <nav className="fees-nav" aria-label="Fee guide sections"><a href="#design-fees">Design</a><a href="#website-fees">Websites</a><a href="#digital-fees">Digital</a><a href="#production-fees">Production</a><a href="#working-together">Before we begin</a></nav>
 
       <section className="fees-chapter" id="design-fees">
         <header className="fees-chapter-heading"><span className="fees-label">Design</span><h2>A brand.<br />A whole world.</h2><p>From the first mark to the system around it. Build a company people can recognise wherever they meet it.</p><a className="fees-evidence" href="/work/sleeping-tiger">Enter the world of Sleeping Tiger <span aria-hidden="true">↗</span></a></header>
         <div>{designFees.map(fee => <FeeRow key={fee.name} {...fee} unit={fee.name === 'Complete branding' ? 'Indicative project fee' : 'Per project'} />)}</div>
+      </section>
+
+      <section className="fees-chapter fees-websites" id="website-fees">
+        <header className="fees-chapter-heading"><span className="fees-label">Website design and development</span><h2>A place for<br />your business<br />to grow.</h2><p>A clear, considered website that explains what you do, makes your business feel credible and gives people a way to take the next step.</p>
+          <a className="fees-website-preview" href="https://www.thedesigncommune.com" target="_blank" rel="noopener noreferrer" aria-label="Explore the Design Commune website, opens in a new tab"><img src="/website-examples/design-commune.png" alt="Homepage of the Design Commune website designed and built by Modern Day" width="1280" height="800" loading="lazy" /><span>Explore the Design Commune website <span aria-hidden="true">↗</span></span></a>
+        </header>
+        <div>
+          <FeeRow name="Website design and development" price="₹1,00,000 to ₹3,00,000" unit="Per project" copy="Start with the website your business needs today. Build in more depth and functionality as the brief demands." />
+          <div className="fees-website-scope"><h3>At ₹1,00,000: get your business going.</h3><p>A focused business website of up to five pages, shaped around the essentials: who you are, what you offer, why it matters and how to get in touch.</p><ul className="fees-includes"><li>Page structure and a clear journey towards an enquiry or conversation.</li><li>Design and development that work comfortably on phones and larger screens.</li><li>Your agreed copy and imagery brought together into a coherent website, ready for launch.</li></ul></div>
+          <div className="fees-website-scope"><h3>More complexity. A wider scope.</h3><p>The fee increases towards ₹3,00,000 as the website needs more pages, richer interactions or more involved functionality. Content management, product catalogues, booking, commerce and integrations can all change the work required.</p><p className="fees-scope">We price the actual brief, not page count alone. Features, content creation, domain, hosting, paid services and ongoing maintenance are confirmed in the proposal, including what is included and what is separate.</p></div>
+        </div>
       </section>
 
       <section className="fees-digital" id="digital-fees">

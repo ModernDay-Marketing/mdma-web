@@ -71,3 +71,15 @@
 @media(min-width:1600px) { .fees-row { grid-template-columns:1fr auto; gap:36px; } .fees-amount { text-align:right; } .fees-amount strong { font-size:28px; } }
 @media(max-width:900px) { .fees-chapter,.fees-working { grid-template-columns:1fr; gap:48px; padding-top:72px; padding-bottom:72px; } .fees-chapter-heading>p { max-width:550px; } .fees-digital-scope { grid-template-columns:1fr 1fr; gap:36px; } .fees-digital-foot { display:block; } .fees-digital-foot .fees-evidence { margin-top:24px; } .fees-retainer { grid-template-columns:1fr; gap:24px; } .fees-retainer p { max-width:600px; } }
 @media(max-width:620px) { .fees-header { padding-top:20px; padding-bottom:20px; } .fees-header img { width:132px; } .fees-header>span { display:none; } .fees-header>a:last-child { font-size:12px; gap:10px; } .fees-hero { padding-top:24px; padding-bottom:36px; } .fees-hero-meta { font-size:10px; gap:12px; } .fees-hero h1 { font-size:clamp(48px,11.3vw,70px); margin:64px 0 36px; } .fees-hero-bottom { align-items:start; flex-direction:column; } .fees-hero-bottom>a { width:100%; justify-content:space-between; } .fees-nav { gap:0; justify-content:space-between; flex-wrap:wrap; } .fees-nav a { font-size:12px; padding:20px 4px; } .fees-row h3 { font-size:23px; } .fees-digital { padding-top:64px; } .fees-digital-scope { grid-template-columns:1fr; gap:28px; padding:36px 0; } .fees-digital-scope p { margin-top:10px; } .fees-retainer { margin-top:40px; } .fees-retainer strong { font-size:clamp(25px,7.1vw,39px); } .fees-conviction { padding-top:60px; padding-bottom:60px; } .fees-conviction>div { grid-template-columns:1fr; gap:20px; } .fees-conviction p { font-size:16px; } .fees-working { gap:26px; } .fees-close { grid-template-columns:1fr; padding-top:48px; padding-bottom:48px; } .fees-footer { flex-direction:column; gap:14px; } }
+
+/* Website fees: a real website example and two clear levels of scope. */
+.fees-websites { border-top:1px solid var(--line); }
+.fees-website-preview { display:block; margin-top:36px; max-width:500px; border:1px solid var(--line); }
+.fees-website-preview img { display:block; width:100%; height:auto; }
+.fees-website-preview>span { display:flex; justify-content:space-between; gap:20px; padding:16px; font-size:14px; line-height:1.5; }
+.fees-website-preview:hover>span { text-decoration:underline; text-underline-offset:4px; }
+.fees-website-scope { border-top:1px solid var(--line); padding:28px 0; }
+.fees-website-scope h3 { font-size:22px; font-weight:500; letter-spacing:-.035em; line-height:1.3; }
+.fees-website-scope p { margin-top:16px; font-size:16px; max-width:620px; }
+.fees-website-scope p.fees-scope { font-size:13px; }
+@media(max-width:620px) { .fees-nav { display:grid; grid-template-columns:repeat(3,1fr); gap:0 16px; } .fees-nav a { padding:14px 0; } .fees-nav a:last-child { grid-column:span 2; } .fees-website-scope h3 { font-size:21px; } }
