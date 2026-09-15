@@ -6,6 +6,11 @@ import { publicAssetUrl, useCaseStudy, usePublishedProjectSlugs } from './supaba
 import projectCatalog from './project-catalog.json';
 import { applyProjectCopy } from './project-copy';
 import './styles.css';
+import NinetyNorthCase from './ninety-north-case';
+import SlaabCase from './slaab-case';
+import HomeHero from './home-hero';
+import PricingPage from './pricing-page';
+import './home-hero.css';
 
 gsap.registerPlugin(ScrollTrigger);
 const Studio = React.lazy(() => import('./cms'));
@@ -32,7 +37,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   const path = window.location.pathname;
   const lightHeader = path === '/about' || path.startsWith('/about/');
-  const designWork = ['/work/design', '/work/egg-break', '/work/social-battery', '/work/sleeping-tiger', '/work/eagle-stone', '/work/the-sanctuary', '/work/ghar-culture', '/work/design-commune', '/work/sasyaa'];
+  const designWork = ['/work/design', '/work/egg-break', '/work/social-battery', '/work/sleeping-tiger', '/work/eagle-stone', '/work/the-sanctuary', '/work/ghar-culture', '/work/design-commune', '/work/sasyaa', '/work/ninety-north', '/work/slaab'];
   const digitalWork = ['/work/digital', '/work/dat-social', '/work/modcon-social', '/work/malle-social', '/work/helios-social', '/work/grey-rose-social', '/work/agartha-social'];
   const activeWing = designWork.includes(path) ? 'Design' : digitalWork.includes(path) ? 'Digital' : null;
   const oppositeWing = activeWing === 'Design' ? 'Digital' : 'Design';
@@ -46,7 +51,9 @@ function Header() {
         <nav id="main-navigation" className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
           <a href="/#work-gate" onClick={() => setOpen(false)}>Work</a>
           <a href="/services" onClick={() => setOpen(false)}>Services</a>
+          <a href="/pricing" onClick={() => setOpen(false)}>Pricing</a>
           <a href="/about" onClick={() => setOpen(false)}>About</a>
+          <a href="/careers" onClick={() => setOpen(false)}>Careers</a>
           <a className="nav-cta" href="/contact" onClick={() => setOpen(false)}>Start a conversation <Arrow /></a>
         </nav>
       </header>
@@ -931,7 +938,7 @@ function ConversionHero() {
         <div><span>Practice 01</span><strong>Design</strong><small>Identity / Brand world / Experience</small></div>
         <div><span>Practice 02</span><strong>Digital</strong><small>Strategy / Content / Influence</small></div>
         <div><span>Completed</span><strong>50+</strong><small>Projects across sectors</small></div>
-        <div><span>Established</span><strong>2020</strong><small>Founder led from Hyderabad</small></div>
+        <div><span>Established</span><strong>2022</strong><small>Founder led from Hyderabad</small></div>
       </div>
     </section>
   );
@@ -983,7 +990,7 @@ function MuseumHero() {
           ? 'Logos, identity systems, brand worlds, websites and apps.'
           : mode === 'digital'
             ? 'Go to market strategy, social media, content and influence.'
-            : 'Move across the field to see what each practice changes.'}</p>
+            : 'Build recognition on one side. Create momentum on the other.'}</p>
       </div>
       <div className="museum-lens-controls" onPointerLeave={() => setMode('neutral')}>
         <button className={mode === 'digital' ? 'active' : ''} onPointerEnter={() => setMode('digital')} onFocus={() => setMode('digital')} onClick={() => setMode('digital')}>Digital</button>
@@ -1026,27 +1033,27 @@ function HomeWingGate() {
     <section ref={gateRef} className={`home-wing-gate${entering ? ` is-entering entering-${entering}` : ''}`} id="work-gate" aria-label="Choose an entrance">
       <div className="home-wing-choice">
         <b>Choose an entrance.</b>
-        <span>Two practices. Pick the one you need.</span>
+        <span>Recognition first. Momentum every day.</span>
       </div>
       <a className="home-wing-card home-wing-design" href="/work/design" onClick={event => enterWing(event, 'design')}>
-        <span className="home-wing-top"><i>Build the world.</i><i>Design / Brand systems</i></span>
+        <span className="home-wing-top"><i>Design</i><i>Brand systems</i></span>
         <div>
           <span>Brand strategy, identity, packaging and digital experiences</span>
-          <h2>Give ambition<br />a form.</h2>
+          <h2>Build the<br />world.</h2>
           <span className="home-wing-enter">
-            <strong>Enter Design</strong>
+            <strong>See Design Work</strong>
             <i aria-hidden="true">→</i>
           </span>
           <p>We translate the company in your head into a strategic and visual system the market can recognise, leadership can defend and teams can carry forward.</p>
         </div>
       </a>
       <a className="home-wing-card home-wing-digital" href="/work/digital" onClick={event => enterWing(event, 'digital')}>
-        <span className="home-wing-top"><i>Move the market.</i><i>Digital / Market presence</i></span>
+        <span className="home-wing-top"><i>Digital</i><i>Market presence</i></span>
         <div>
           <span>Social strategy, content production and campaigns</span>
-          <h2>Create<br />market pull.</h2>
+          <h2>Move the<br />market.</h2>
           <span className="home-wing-enter">
-            <strong>Enter Digital</strong>
+            <strong>See Digital Work</strong>
             <i aria-hidden="true">→</i>
           </span>
           <p>We turn positioning into an editorial engine that earns attention, builds memory and gives the brand a living presence between its biggest moments.</p>
@@ -1473,7 +1480,6 @@ function SensoryHero() {
 function WorldsPrelude() {
   return (
     <section className="worlds-prelude" id="worlds-prelude" aria-labelledby="worlds-prelude-title">
-      <div className="worlds-prelude-top"><span>The logic / 01 + 02</span><span>Recognition  → Momentum</span></div>
       <div className="worlds-prelude-copy" data-reveal>
         <p>Every enduring company is built twice.</p>
         <h2 id="worlds-prelude-title">First, it becomes<br /><em>unmistakable.</em><br />Then, <strong>unmissable.</strong></h2>
@@ -1508,7 +1514,7 @@ function HomePage() {
       />
       <Header />
       <main id="top">
-        <SensoryHero />
+        <HomeHero />
         <WorldsPrelude />
         <HomeWingGate />
         <ContactBand />
@@ -1669,6 +1675,21 @@ function Seo({ title, description, path }) {
 
 function SiteMotion() {
   useEffect(() => {
+    let resumeTimer = 0;
+    const onScroll = () => {
+      document.documentElement.classList.add('is-scrolling');
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => document.documentElement.classList.remove('is-scrolling'), 160);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.clearTimeout(resumeTimer);
+      document.documentElement.classList.remove('is-scrolling');
+    };
+  }, []);
+
+  useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) return undefined;
 
@@ -1696,20 +1717,6 @@ function SiteMotion() {
           );
         }
 
-        const sections = main ? Array.from(main.querySelectorAll(':scope > section')).slice(1) : [];
-        sections.forEach(section => {
-          gsap.fromTo(section,
-            { y: 28, autoAlpha: .01 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              duration: .76,
-              ease: 'power3.out',
-              clearProps: 'transform,opacity,visibility',
-              scrollTrigger: { trigger: section, start: 'top 88%', once: true }
-            }
-          );
-        });
       });
 
       document.querySelectorAll('.motion-arrow').forEach(arrow => {
@@ -1727,7 +1734,6 @@ function SiteMotion() {
         });
       });
 
-      ScrollTrigger.refresh();
     });
 
     return () => {
@@ -1745,9 +1751,89 @@ function PageFooter() {
     <footer className="footer-classic">
       <Logo />
       <div><span>Jubilee Hills, Hyderabad</span><span>Mon to Fri / 10:00 to 19:00 IST</span></div>
-      <div><a href="https://www.linkedin.com/company/modern-day/">LinkedIn <Arrow /></a><a href="tel:+919573174647">+91 95731 74647</a></div>
+      <div><a href="https://www.instagram.com/modernday_marketingagency/" target="_blank" rel="noopener noreferrer">Instagram <Arrow /></a><a href="https://www.linkedin.com/company/modern-day/" target="_blank" rel="noopener noreferrer">LinkedIn <Arrow /></a><a href="/pricing">Pricing <Arrow /></a><a href="/careers">Careers <Arrow /></a><a href="tel:+919573174647">+91 95731 74647</a></div>
       <span>© {new Date().getFullYear()} Modern Day</span>
     </footer>
+  );
+}
+
+const careerRoles = [
+  { title: 'Social Media Strategist', discipline: 'Digital', experience: '2 years', summary: 'Turn business ambition into a point of view people want to follow.', focus: ['Editorial thinking and platform judgment', 'Campaign and content system planning', 'Clear writing, research and presentation'] },
+  { title: 'Graphic Designer', discipline: 'Design', experience: '2 years', summary: 'Build identities and visual systems with an idea at their centre.', focus: ['Identity, typography and layout', 'Concept development and presentation', 'Care across digital and physical applications'] },
+  { title: 'Motion Graphic Designer', discipline: 'Design and Digital', experience: '2 years', summary: 'Give ideas rhythm, clarity and a reason to stay in memory.', focus: ['2D motion, type and compositing', 'Storyboards, transitions and visual pacing', 'Social films and identity motion systems'] },
+  { title: 'HR', discipline: 'Studio', experience: '1 year', summary: 'Help a demanding creative studio find, support and grow exceptional people.', focus: ['Hiring and candidate experience', 'People operations and studio culture', 'Clear communication and dependable follow through'] },
+  { title: 'Video Editor', discipline: 'Digital', experience: '3 years', summary: 'Find the strongest story inside the footage and make every second earn its place.', focus: ['Narrative editing and social formats', 'Sound, colour and finishing judgment', 'Fast, organised production workflows'] },
+  { title: 'Cinematographer', discipline: 'Digital', experience: '2 years', summary: 'Make brands, founders and places feel true before they feel polished.', focus: ['Lighting, composition and camera movement', 'Campaign, founder and product films', 'Small crew resourcefulness and visual taste'] }
+];
+
+function CareersPage() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [application, setApplication] = useState({ name: '', email: '', location: '', portfolio: '', resume: '', note: '' });
+  const role = careerRoles[roleIndex];
+  const updateApplication = (key, value) => setApplication(current => ({ ...current, [key]: value }));
+  const sendApplication = event => {
+    event.preventDefault();
+    const subject = `Career application: ${role.title} / ${application.name}`;
+    const body = [
+      `Role: ${role.title}`,
+      `Name: ${application.name}`,
+      `Email: ${application.email}`,
+      `Location: ${application.location || 'Not provided'}`,
+      `Portfolio: ${application.portfolio || 'Not provided'}`,
+      `Resume: ${application.resume || 'Not provided'}`,
+      '',
+      'Why Modern Day:',
+      application.note
+    ].join('\n');
+    window.location.href = `mailto:work@mdma.co.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+  return (
+    <>
+      <Seo title="Careers at Modern Day | Join Our Creative Studio" description="Explore open roles in strategy, design, motion, people, editing and cinematography at Modern Day in Hyderabad." path="/careers" />
+      <Header />
+      <main className="careers-page">
+        <section className="careers-hero">
+          <div className="careers-hero-top"><span>Modern Day / Open call</span><span>Hyderabad / India</span></div>
+          <h1>Make work<br />worth <em>noticing.</em></h1>
+          <div className="careers-hero-foot"><p>We are building a studio for people who care about the idea, the detail and what the work changes.</p><a href="#open-roles">See open roles <span>↓</span></a></div>
+        </section>
+
+        <section className="careers-roles" id="open-roles">
+          <header><span>Open roles / {String(careerRoles.length).padStart(2, '0')}</span><h2>Choose where<br />you make an impact.</h2></header>
+          <div className="careers-role-grid">
+            <div className="career-role-list" role="tablist" aria-label="Open roles">
+              {careerRoles.map((item, index) => <button type="button" role="tab" aria-selected={roleIndex === index} className={roleIndex === index ? 'active' : ''} onClick={() => setRoleIndex(index)} key={item.title}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item.title}</strong><small>{item.experience} minimum</small><i>↗</i></button>)}
+            </div>
+            <article className="career-role-brief" aria-live="polite">
+              <span>{role.discipline} / Full time</span><h3>{role.title}</h3><p>{role.summary}</p>
+              <strong className="career-experience">Minimum {role.experience} experience</strong>
+              <div><b>What we will notice</b>{role.focus.map(item => <span key={item}>{item}</span>)}</div>
+              <a href="#career-application">Apply for this role <Arrow /></a>
+            </article>
+          </div>
+        </section>
+
+        <section className="career-application" id="career-application">
+          <header><span className="section-label">Your application</span><h2>Show us how<br />you see.</h2><p>Choose a role, share the work that represents you, then open the prepared application in your email.</p></header>
+          <div className="career-application-grid">
+            <form onSubmit={sendApplication}>
+              <label className="career-role-select"><span>Applying for</span><select value={roleIndex} onChange={event => setRoleIndex(Number(event.target.value))}>{careerRoles.map((item, index) => <option value={index} key={item.title}>{item.title}</option>)}</select></label>
+              <div className="career-fields">
+                <label><span>Your name</span><input required value={application.name} onChange={event => updateApplication('name', event.target.value)} placeholder="Name" /></label>
+                <label><span>Email</span><input required type="email" value={application.email} onChange={event => updateApplication('email', event.target.value)} placeholder="you@email.com" /></label>
+                <label><span>Location</span><input value={application.location} onChange={event => updateApplication('location', event.target.value)} placeholder="City, country" /></label>
+                <label><span>Portfolio link</span><input type="url" value={application.portfolio} onChange={event => updateApplication('portfolio', event.target.value)} placeholder="https://" /></label>
+                <label className="wide"><span>Résumé link</span><input type="url" value={application.resume} onChange={event => updateApplication('resume', event.target.value)} placeholder="Google Drive, Dropbox or website link" /></label>
+                <label className="wide"><span>Why Modern Day?</span><textarea required rows="5" value={application.note} onChange={event => updateApplication('note', event.target.value)} placeholder="Tell us what you want to make and what you care about." /></label>
+              </div>
+              <button className="career-send" type="submit"><span>Open application in email</span><Arrow /></button>
+            </form>
+            <aside className="career-receipt"><span>MD / Candidate file</span><strong>{role.title}</strong><p>{application.name || 'Your name'}</p><div><span>Portfolio</span><b>{application.portfolio ? 'Included' : 'Add a link'}</b></div><div><span>Résumé</span><b>{application.resume ? 'Included' : 'Add a link'}</b></div><footer>To / work@mdma.co.in</footer></aside>
+          </div>
+        </section>
+      </main>
+      <PageFooter />
+    </>
   );
 }
 
@@ -1942,7 +2028,7 @@ function ServicesPage() {
           </div>
         </section>
         <section className="services-proof">
-          <div><span>Established</span><strong>2020</strong></div>
+          <div><span>Established</span><strong>2022</strong></div>
           <div><span>Completed projects</span><strong>50+</strong></div>
           <blockquote>Senior attention.<br />Enterprise scale thinking.</blockquote>
         </section>
@@ -1955,9 +2041,9 @@ function ServicesPage() {
 
 function ContactBand() {
   return (
-    <section className="contact-band">
-      <p className="section-label">Start with the business change</p>
-      <div><h2>What needs to<br />move?</h2><a href="/contact">Start a conversation <Arrow /></a></div>
+    <section className="contact-band home-contact-band">
+      <p className="section-label">A Modern Day point of view</p>
+      <div><h2>Modern<br />problems need<br />Modern Day<br />thinking.</h2><a href="/contact">Start a conversation <Arrow /></a></div>
     </section>
   );
 }
@@ -2095,9 +2181,9 @@ function NotFound() {
   );
 }
 
-const codedProjects = new Set(['egg-break', 'social-battery', 'sleeping-tiger', 'eagle-stone', 'the-sanctuary', 'ghar-culture', 'design-commune', 'dat-social', 'modcon-social', 'malle-social', 'helios-social', 'grey-rose-social', 'agartha-social', 'pandora', 'sasyaa', 'luma', 'millet', 'shriyasom', 'hera', 'sepal', 'briskev', 'vian-valley', 'restaurant-showcase', 'wilderness-retreat', 'orka']);
-const projectOrder = ['sleeping-tiger', 'egg-break', 'social-battery', 'design-commune', 'ghar-culture', 'pandora', 'eagle-stone', 'sasyaa', 'millet', 'dat-social', 'modcon-social', 'malle-social', 'helios-social', 'grey-rose-social', 'agartha-social', 'the-sanctuary'];
-const portfolioExcludedProjects = new Set(['luma']);
+const codedProjects = new Set(['slaab', 'ninety-north', 'egg-break', 'social-battery', 'sleeping-tiger', 'eagle-stone', 'the-sanctuary', 'ghar-culture', 'design-commune', 'dat-social', 'modcon-social', 'malle-social', 'helios-social', 'grey-rose-social', 'agartha-social', 'pandora', 'sasyaa', 'luma', 'millet', 'shriyasom', 'hera', 'sepal', 'briskev', 'vian-valley', 'restaurant-showcase', 'wilderness-retreat', 'orka']);
+const projectOrder = ['slaab', 'ninety-north', 'sleeping-tiger', 'egg-break', 'social-battery', 'design-commune', 'ghar-culture', 'pandora', 'eagle-stone', 'sasyaa', 'dat-social', 'modcon-social', 'malle-social', 'helios-social', 'grey-rose-social', 'agartha-social'];
+const portfolioExcludedProjects = new Set(['luma', 'millet', 'briskev', 'the-sanctuary']);
 const retiredProjectEntries = new Set(['egg-break-packing-designing', 'egg-break-logo', 'fmn', 'pinnaki', 'lazy-chair', 'grey-rose', 'vianproperties', 'spice-hub', 'taamara', 'f45', 'handcraftfoods', 'autumn-leaf', 'greenpark', 'one-cloud', 'ultron', 'shriyasom', 'hera', 'sepal', 'vian-valley', 'restaurant-showcase', 'wilderness-retreat', 'orka']);
 const eggBreakProject = {
   slug: 'egg-break', title: 'EggBreak', category: 'Brand & product design', wing: 'Design',
@@ -2133,7 +2219,7 @@ const heliosProject = {
   sourceUrl: 'https://www.instagram.com/heliosstone/'
 };
 const greyRoseSocialProject = {
-  slug: 'grey-rose-social', title: 'Gray Rose', category: 'Social media and brand development', wing: 'Digital',
+  slug: 'grey-rose-social', title: 'Grey Rose', category: 'Social media and brand development', wing: 'Digital',
   summary: 'A founder led reel system that turns global exposure, material knowledge and design judgment into visible authority.'
 };
 const agarthaProject = {
@@ -2145,7 +2231,15 @@ const designCommuneProject = {
   slug: 'design-commune', title: 'Design Commune', category: 'Brand identity system', wing: 'Design',
   summary: 'A modular identity where two initials become one continuous architectural space, built to connect, repeat and grow.'
 };
-const projects = [sleepingTigerProject, eggBreakProject, socialBatteryProject, designCommuneProject, datProject, modconProject, malleProject, heliosProject, greyRoseSocialProject, agarthaProject, ...projectCatalog.filter(project => !retiredProjectEntries.has(project.slug)).map(applyProjectCopy)].map((project, index) => ({
+const ninetyNorthProject = {
+  slug: 'ninety-north', title: 'Ninety North', category: 'Website strategy and experience design', wing: 'Design',
+  summary: 'A spatial digital experience built from polar coordinates, precise language and intelligent motion for an AI, product and technology company.'
+};
+const slaabProject = {
+  slug: 'slaab', title: 'SLAAB', category: 'Logo exploration and identity', wing: 'Design',
+  summary: 'Four identity directions for a surface visualization company, tested across dimensional marks, interfaces, objects and spatial screens.'
+};
+const projects = [slaabProject, ninetyNorthProject, sleepingTigerProject, eggBreakProject, socialBatteryProject, designCommuneProject, datProject, modconProject, malleProject, heliosProject, greyRoseSocialProject, agarthaProject, ...projectCatalog.filter(project => !retiredProjectEntries.has(project.slug)).map(applyProjectCopy)].map((project, index) => ({
   name: project.title === 'Sanctuary' ? 'The Sanctuary' : project.title,
   type: project.category,
   wing: project.wing,
@@ -2167,24 +2261,28 @@ function WorkPage({ fixedWing = null }) {
   const [filter, setFilter] = useState(fixedWing || 'All');
   const registry = usePublishedProjectSlugs();
   const registryIsComplete = registry.loaded && registry.slugs.length >= Math.floor(projects.length * .5);
-  const activeProjects = registryIsComplete ? projects.filter(project => registry.slugs.includes(project.slug) || ['design-commune', 'sleeping-tiger', 'egg-break', 'social-battery', 'ghar-culture', 'pandora', 'eagle-stone', 'sasyaa', 'millet', 'dat-social', 'modcon-social', 'grey-rose-social', 'malle-social', 'helios-social', 'agartha-social'].includes(project.slug)) : projects;
+  const activeProjects = registryIsComplete ? projects.filter(project => registry.slugs.includes(project.slug) || ['slaab', 'ninety-north', 'design-commune', 'sleeping-tiger', 'egg-break', 'social-battery', 'ghar-culture', 'pandora', 'eagle-stone', 'sasyaa', 'millet', 'dat-social', 'modcon-social', 'grey-rose-social', 'malle-social', 'helios-social', 'agartha-social'].includes(project.slug)) : projects;
   const activeFilter = fixedWing || filter;
   const visibleProjects = (activeFilter === 'All' ? activeProjects : activeProjects.filter(project => project.wing === activeFilter))
     .filter(project => !portfolioExcludedProjects.has(project.slug));
   const isDesign = fixedWing === 'Design';
   const isDigital = fixedWing === 'Digital';
   const digitalFeaturedOrder = ['dat-social', 'malle-social', 'helios-social'];
-  const designFeaturedOrder = ['sleeping-tiger', 'egg-break', 'social-battery', 'design-commune', 'ghar-culture', 'pandora'];
+  const designFeaturedOrder = ['slaab', 'sleeping-tiger', 'egg-break', 'social-battery', 'ninety-north', 'ghar-culture', 'pandora'];
+  const orderedWingProjects = order => [
+    ...order.map(slug => visibleProjects.find(project => project.slug === slug)).filter(Boolean),
+    ...visibleProjects.filter(project => !order.includes(project.slug))
+  ];
   const featured = isDigital
-    ? digitalFeaturedOrder.map(slug => visibleProjects.find(project => project.slug === slug)).filter(Boolean)
+    ? orderedWingProjects(digitalFeaturedOrder)
     : isDesign
-      ? designFeaturedOrder.map(slug => visibleProjects.find(project => project.slug === slug)).filter(Boolean)
+      ? orderedWingProjects(designFeaturedOrder)
       : visibleProjects.slice(0, 3);
   const registerProjects = fixedWing
     ? visibleProjects.filter(project => !featured.some(featuredProject => featuredProject.slug === project.slug))
     : visibleProjects;
-  const designCount = activeProjects.filter(project => project.wing === 'Design').length;
-  const digitalCount = activeProjects.filter(project => project.wing === 'Digital').length;
+  const designCount = activeProjects.filter(project => project.wing === 'Design' && !portfolioExcludedProjects.has(project.slug)).length;
+  const digitalCount = activeProjects.filter(project => project.wing === 'Digital' && !portfolioExcludedProjects.has(project.slug)).length;
   const pageTitle = isDesign ? 'Selected Design Work | Modern Day' : isDigital ? 'Selected Digital Work | Modern Day' : 'Selected Design and Digital Work | Modern Day';
   const pageDescription = isDesign
     ? 'Selected brand identity, packaging and product design work by Modern Day in Hyderabad.'
@@ -2249,7 +2347,7 @@ function WorkPage({ fixedWing = null }) {
                   note: 'A moon led identity for a hospitality world shaped by curiosity, cocktails and after dark allure.'
                 },
                 'grey-rose-social': {
-                  title: <>Gray<br />Rose</>,
+                  title: <>Grey<br />Rose</>,
                   note: 'A designer becomes the visible expert through founder led reels, international sourcing and a clear editorial point of view.'
                 },
                 'malle-social': {
@@ -2261,7 +2359,7 @@ function WorkPage({ fixedWing = null }) {
                   note: 'Founder conviction, city context and project stories brought together as one clear social media voice for a modern real estate company.'
                 },
                 'dat-social': {
-                  title: <>D<br />A T</>,
+                  title: <>DAT</>,
                   note: 'A complex spatial technology proposition made immediate through dimensional storytelling, motion led social content and a complete digital home.'
                 }
               }[project.slug] || { title: project.name, note: project.note };
@@ -2276,28 +2374,19 @@ function WorkPage({ fixedWing = null }) {
               );
             })}
           </div>
-          {isDigital && visibleProjects.length > featured.length && (
-            <a className="more-work-cue" href="#all-projects">
-              <span>Keep exploring</span>
-              <strong>Explore all {visibleProjects.length} digital projects below</strong>
-              <i aria-hidden="true">↓</i>
-            </a>
-          )}
         </section>
 
-        <section className={`work-register ${fixedWing ? 'work-register-continuation' : ''}`} id="all-projects">
-          {!fixedWing && <div className="register-head">
+        {!fixedWing && <section className="work-register" id="all-projects">
+          <div className="register-head">
             <div><span>Project register</span><h2>The wider body of work.</h2></div>
-            {!fixedWing && (
-              <div className="work-filters" aria-label="Filter projects">
-                {['All', 'Design', 'Digital'].map(option => (
-                  <button className={filter === option ? 'active' : ''} onClick={() => setFilter(option)} key={option}>
-                    {option} <span>{option === 'All' ? activeProjects.length : activeProjects.filter(project => project.wing === option).length}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>}
+            <div className="work-filters" aria-label="Filter projects">
+              {['All', 'Design', 'Digital'].map(option => (
+                <button className={filter === option ? 'active' : ''} onClick={() => setFilter(option)} key={option}>
+                  {option} <span>{option === 'All' ? activeProjects.length : activeProjects.filter(project => project.wing === option).length}</span>
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="project-index">
             {registerProjects.map((project, index) => (
               <article id={fixedWing ? `project-${project.slug}` : undefined} className="project-tile" key={project.slug}>
@@ -2311,7 +2400,7 @@ function WorkPage({ fixedWing = null }) {
               </article>
             ))}
           </div>
-        </section>
+        </section>}
         <ContactBand />
       </main>
       <PageFooter />
@@ -2326,7 +2415,7 @@ function AboutPage() {
       <Header />
       <main className="interior-page about-page">
         <section className="about-hero">
-          <p className="eyebrow">Modern Day / Since 2020</p>
+          <p className="eyebrow">Modern Day / Since 2022</p>
           <h1>Ambition starts<br />in one mind. <em>We make</em><br />the market see it.</h1>
           <div><p>Independent Design and Digital company.<br />Hyderabad, India.</p><p>We work at the point where founder conviction becomes organisational clarity, then build the identity and market presence that let the world feel the same ambition.</p></div>
         </section>
@@ -2357,14 +2446,18 @@ function AboutPage() {
             <a href="/about/dharma-teja">Enter the founder’s room <Arrow /></a>
           </div>
         </section>
-        <section className="fact-section">
-          <div><strong>2020</strong><span>Founded independently in Hyderabad</span></div>
-          <div><strong>85+</strong><span>Creative mandates completed</span></div>
-          <div><strong>1M+</strong><span>Views on a standout campaign</span></div>
-          <div><strong>2</strong><span>Practices. One standard.</span></div>
+        <section className="about-proof">
+          <header>
+            <p className="section-label">The studio at a glance</p>
+            <h2>Proof should say<br />something useful.</h2>
+          </header>
+          <div className="about-proof-grid">
+            <article className="about-proof-primary"><strong>85+</strong><h3>Companies helped.</h3><p>Across identity, brand systems, social media, content and campaigns.</p></article>
+            <article><strong>2022</strong><h3>Founded independently.</h3><p>Built in Hyderabad and working with ambitious companies wherever the right problem takes us.</p></article>
+          </div>
         </section>
         <section className="beliefs-section">
-          <p className="section-label">How we show up</p>
+          <header className="beliefs-heading"><p className="section-label">Our working character</p><h2>How we<br />show up.</h2></header>
           <div className="beliefs-grid">
             <div><span>Clarity</span><h3>If the idea is not clear, the work is not ready.</h3></div>
             <div><span>Conviction</span><h3>Strong work chooses a direction and commits.</h3></div>
@@ -2420,7 +2513,7 @@ function FounderPage() {
             <h1>Dharma<br /><em>Teja.</em></h1>
             <p className="founder-lede">A storyteller who built an agency for founders unwilling to make ordinary companies.</p>
             <div className="founder-credentials">
-              <span>Modern Day / Since 2020</span>
+              <span>Modern Day / Since 2022</span>
               <span>New York Film Academy / 2010 to 2011</span>
               <span>Hyderabad / India</span>
             </div>
@@ -3074,7 +3167,7 @@ const greyRoseChapters = [
     title: 'First, make the eye visible.',
     copy: 'The opening chapter gives the founder a clear voice. Taste becomes language. Design judgment becomes a reason to listen, remember and return.',
     reels: [
-      ['aesthetics-three-words', 'Aesthetics in three words', 'A concise expression of the Gray Rose visual language.'],
+      ['aesthetics-three-words', 'Aesthetics in three words', 'A concise expression of the Grey Rose visual language.'],
       ['design-influence', 'What influences the work', 'The references and experiences behind her design decisions.'],
       ['over-designed', 'When a space becomes over designed', 'An expert opinion on restraint, editing and knowing when a room has enough.'],
       ['breaking-design-rules', 'The rule worth breaking', 'Confidence built through a thoughtful challenge to design convention.']
@@ -3111,7 +3204,7 @@ const greyRoseChapters = [
     copy: 'The final chapter connects personality and perspective to real decisions. A finished home, the projects she chooses and direct answers complete the picture of a trusted creative partner.',
     reels: [
       ['sumadhura', 'Sumadhura finished home', 'A completed interior turns the content story into visible proof.'],
-      ['why-say-yes', 'Why say yes to a project', 'Values and creative alignment shape the work Gray Rose accepts.'],
+      ['why-say-yes', 'Why say yes to a project', 'Values and creative alignment shape the work Grey Rose accepts.'],
       ['design-question', 'A designer answers', 'A direct expert response builds familiarity with her voice.'],
       ['ad-01', 'Design at a glance', 'A concise campaign film that distils the studio’s promise.']
     ]
@@ -3137,9 +3230,9 @@ function GreyRoseReel({reel, index}) {
     <article className="grey-rose-reel">
       <div className="grey-rose-reel-media">
         {playing ? (
-          <video src={`/images/work/grey-rose/reels/${slug}.mp4`} poster={`/images/work/grey-rose/reels/${slug}.jpg`} controls autoPlay preload="metadata" playsInline aria-label={`Gray Rose reel: ${title}`} />
+          <video src={`/images/work/grey-rose/reels/${slug}.mp4`} poster={`/images/work/grey-rose/reels/${slug}.jpg`} controls autoPlay preload="metadata" playsInline aria-label={`Grey Rose reel: ${title}`} />
         ) : (
-          <button type="button" className="grey-rose-reel-poster" onClick={() => setPlaying(true)} aria-label={`Play Gray Rose reel: ${title}`}>
+          <button type="button" className="grey-rose-reel-poster" onClick={() => setPlaying(true)} aria-label={`Play Grey Rose reel: ${title}`}>
             <img src={`/images/work/grey-rose/reels/${slug}.jpg`} alt="" loading="lazy" />
             <span aria-hidden="true">Play</span>
           </button>
@@ -3174,7 +3267,7 @@ function GreyRoseHeroFilm() {
         loop
         playsInline
         preload="metadata"
-        aria-label="Gray Rose exploring design, culture and craft in China"
+        aria-label="Grey Rose exploring design, culture and craft in China"
       />
       <button type="button" className="grey-rose-sound-control" onClick={toggleSound} aria-pressed={!muted}>
         {muted ? 'Play sound' : 'Sound on'}
@@ -3187,14 +3280,14 @@ function GreyRoseHeroFilm() {
 function GreyRoseSocialPage() {
   return (
     <>
-      <Seo title="Gray Rose Social Media Case Study | Modern Day" description="How Modern Day built a founder led social media and brand development system for Gray Rose through expertise, international sourcing and design reels." path="/work/grey-rose-social" />
+      <Seo title="Grey Rose Social Media Case Study | Modern Day" description="How Modern Day built a founder led social media and brand development system for Grey Rose through expertise, international sourcing and design reels." path="/work/grey-rose-social" />
       <Header />
       <main className="grey-rose-story">
         <section className="grey-rose-hero">
           <GreyRoseHeroFilm />
           <div className="grey-rose-hero-copy">
             <div className="grey-rose-hero-meta"><span>Digital / Social media</span><span>Brand development / Interior design</span></div>
-            <img src="/images/work/grey-rose/grey-rose-logo-ink.png" alt="Gray Rose" className="grey-rose-wordmark" />
+            <img src="/images/work/grey-rose/grey-rose-logo-ink.png" alt="Grey Rose" className="grey-rose-wordmark" />
             <h1>We turned a designer’s eye into a point of view people could follow.</h1>
             <p>Sixteen founder led films connect design judgment, international exposure, material intelligence and finished work into one recognisable presence.</p>
           </div>
@@ -3203,7 +3296,7 @@ function GreyRoseSocialPage() {
         <section className="grey-rose-premise">
           <span>The mandate</span>
           <h2>The expertise was already there.<br />The content made it visible.</h2>
-          <p>Gray Rose needed more than a polished feed. The founder needed to be recognised as the thinking behind the studio. We built a reel system where every format reveals a different layer of her authority.</p>
+          <p>Grey Rose needed more than a polished feed. The founder needed to be recognised as the thinking behind the studio. We built a reel system where every format reveals a different layer of her authority.</p>
         </section>
 
         <section className="grey-rose-instagram" aria-labelledby="grey-rose-instagram-title">
@@ -3216,7 +3309,7 @@ function GreyRoseSocialPage() {
             {greyRoseInstagramPosts.map((post, index) => (
               <article className={`grey-rose-post grey-rose-post-${index + 1}`} key={post.image}>
                 <figure>
-                  <img src={`/images/work/grey-rose/posts/${post.image}`} alt={`Gray Rose editorial creative: ${post.title}`} loading="lazy" />
+                  <img src={`/images/work/grey-rose/posts/${post.image}`} alt={`Grey Rose editorial creative: ${post.title}`} loading="lazy" />
                   <figcaption><span>{post.label}</span></figcaption>
                 </figure>
                 <h3>{post.title}</h3>
@@ -3226,15 +3319,15 @@ function GreyRoseSocialPage() {
           </div>
         </section>
 
-        <section className="grey-rose-identity" aria-label="Gray Rose brand identity">
+        <section className="grey-rose-identity" aria-label="Grey Rose brand identity">
           <div className="grey-rose-identity-board">
-            <img src="/images/work/grey-rose/reels/sumadhura.jpg" alt="A completed Gray Rose bedroom interior" loading="lazy" />
+            <img src="/images/work/grey-rose/reels/sumadhura.jpg" alt="A completed Grey Rose bedroom interior" loading="lazy" />
           </div>
           <div className="grey-rose-identity-copy">
             <span>One visual world</span>
             <h2>Calm in tone.<br />Certain in voice.</h2>
-            <p>The existing Gray Rose identity gave the content its restraint. Dusty rose, warm neutrals, clean typography and considered space keep the founder’s knowledge at the centre.</p>
-            <img src="/images/work/grey-rose/grey-rose-logo-ink.png" alt="Gray Rose black logo" loading="lazy" />
+            <p>The existing Grey Rose identity gave the content its restraint. Dusty rose, warm neutrals, clean typography and considered space keep the founder’s knowledge at the centre.</p>
+            <img src="/images/work/grey-rose/grey-rose-logo-ink.png" alt="Grey Rose black logo" loading="lazy" />
           </div>
         </section>
 
@@ -3253,20 +3346,20 @@ function GreyRoseSocialPage() {
         </div>
 
         <section className="grey-rose-global-proof">
-          <header><span>Brand development in motion</span><h2>Every trip added<br />to the authority.</h2><p>International footage creates more than visual variety. It shows an active practice of looking, learning and selecting, then connects those observations back to the spaces Gray Rose creates.</p></header>
+          <header><span>Brand development in motion</span><h2>Every trip added<br />to the authority.</h2><p>International footage creates more than visual variety. It shows an active practice of looking, learning and selecting, then connects those observations back to the spaces Grey Rose creates.</p></header>
           <div>
-            <figure><img src="/images/work/grey-rose/reels/bali.jpg" alt="Gray Rose exploring craft and interiors in Bali" loading="lazy" /><figcaption>Bali / Atmosphere and craft</figcaption></figure>
-            <figure><img src="/images/work/grey-rose/reels/exploring-china.jpg" alt="Gray Rose exploring design districts in China" loading="lazy" /><figcaption>China / Markets and design culture</figcaption></figure>
-            <figure><img src="/images/work/grey-rose/reels/sourcing-three-countries.jpg" alt="Gray Rose examining materials for international sourcing" loading="lazy" /><figcaption>Global sourcing / Material judgment</figcaption></figure>
+            <figure><img src="/images/work/grey-rose/reels/bali.jpg" alt="Grey Rose exploring craft and interiors in Bali" loading="lazy" /><figcaption>Bali / Atmosphere and craft</figcaption></figure>
+            <figure><img src="/images/work/grey-rose/reels/exploring-china.jpg" alt="Grey Rose exploring design districts in China" loading="lazy" /><figcaption>China / Markets and design culture</figcaption></figure>
+            <figure><img src="/images/work/grey-rose/reels/sourcing-three-countries.jpg" alt="Grey Rose examining materials for international sourcing" loading="lazy" /><figcaption>Global sourcing / Material judgment</figcaption></figure>
           </div>
         </section>
 
         <section className="grey-rose-brand-system">
           <div className="grey-rose-system-copy"><span>One connected presence</span><h2>Voice.<br />World.<br />Proof.</h2></div>
           <div className="grey-rose-system-images">
-            <img src="/images/work/grey-rose/archive/gr-03.jpg" alt="Gray Rose brand presentation" loading="lazy" />
-            <img src="/images/work/grey-rose/archive/gr-06.jpg" alt="Gray Rose colour and material system" loading="lazy" />
-            <img src="/images/work/grey-rose/archive/gr-08.jpg" alt="Gray Rose stationery applications" loading="lazy" />
+            <img src="/images/work/grey-rose/archive/gr-03.jpg" alt="Grey Rose brand presentation" loading="lazy" />
+            <img src="/images/work/grey-rose/archive/gr-06.jpg" alt="Grey Rose colour and material system" loading="lazy" />
+            <img src="/images/work/grey-rose/archive/gr-08.jpg" alt="Grey Rose stationery applications" loading="lazy" />
           </div>
           <p>The identity creates recognition. The founder creates trust. The reel system brings both together often enough to build a memorable brand in public.</p>
         </section>
@@ -4066,17 +4159,17 @@ function DesignCommunePage() {
 }
 
 const socialBatteryFlavors = [
-  { name: 'Cranberry and lime', code: 'Charge 01', color: 'Pink pulse', label: '/images/social-battery/labels/label-1.jpg' },
-  { name: 'Orange and cream', code: 'Charge 02', color: 'Orange boost', label: '/images/social-battery/labels/label-2.jpg' },
-  { name: 'Blueberry and vanilla', code: 'Charge 03', color: 'Violet focus', label: '/images/social-battery/labels/label-3.jpg' },
-  { name: 'Guava and chilli', code: 'Charge 04', color: 'Green surge', label: '/images/social-battery/labels/label-4.jpg' }
+  { name: 'Cranberry and lime', code: 'Charge 01', color: 'Pink pulse', label: '/social-battery/labels/label-1.jpg' },
+  { name: 'Orange and cream', code: 'Charge 02', color: 'Orange boost', label: '/social-battery/labels/label-2.jpg' },
+  { name: 'Blueberry and vanilla', code: 'Charge 03', color: 'Violet focus', label: '/social-battery/labels/label-3.jpg' },
+  { name: 'Guava and chilli', code: 'Charge 04', color: 'Green surge', label: '/social-battery/labels/label-4.jpg' }
 ];
 
 const socialBatteryMockups = [
-  ['/images/social-battery/generated/lineup-light-v2.jpg', 'Four Social Battery cans photographed in a bright white studio', 'The complete flavor family'],
-  ['/images/social-battery/generated/single-pink-v2.jpg', 'Pink cranberry and lime Social Battery can photographed on pale aluminum', 'Single can study'],
-  ['/images/social-battery/generated/steps-light-v2.jpg', 'Four Social Battery flavors arranged on pale aluminum steps', 'Stepped product study'],
-  ['/images/social-battery/generated/ice.jpg', 'Pink cranberry and lime Social Battery can set in crushed ice', 'Cold charge']
+  ['/social-battery/product-correct/cranberry-lime.png', 'Cranberry and lime Social Battery bottle in a red illuminated product setting', 'Cranberry and lime'],
+  ['/social-battery/product-correct/orange-cream.png', 'Orange and cream Social Battery bottle on a white studio background', 'Orange and cream'],
+  ['/social-battery/product-correct/blueberry-vanilla.png', 'Blueberry and vanilla Social Battery bottle in a violet liquid world', 'Blueberry and vanilla'],
+  ['/social-battery/product-correct/guava-chilli.png', 'Guava and chilli Social Battery bottle in a green liquid world', 'Guava and chilli']
 ];
 
 function SocialBatteryPage() {
@@ -4097,6 +4190,23 @@ function SocialBatteryPage() {
     return () => context.revert();
   }, []);
 
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const videos = Array.from(page.current?.querySelectorAll('.sb-campaign-video') || []);
+    if (reduced) return undefined;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const video = entry.target;
+        if (!video.src) video.src = video.dataset.src;
+        video.play().catch(() => {});
+        observer.unobserve(video);
+      });
+    }, { rootMargin: '500px 0px' });
+    videos.forEach(video => observer.observe(video));
+    return () => observer.disconnect();
+  }, []);
+
   const gallery = (items, className = '') => (
     <div className={`sb-gallery ${className}`}>
       {items.map(([src, alt, caption], index) => (
@@ -4114,12 +4224,12 @@ function SocialBatteryPage() {
       <Header />
       <main className="sb-case" ref={page}>
         <section className="sb-hero">
-          <img src="/images/social-battery/generated/hero-lineup.jpg" alt="Four Social Battery energy drink cans in pink, orange, violet and green inside an arcade inspired power chamber" />
+          <img src="/social-battery/generated/hero-lineup.jpg" alt="Four Social Battery energy drink cans in pink, orange, violet and green inside an arcade inspired power chamber" />
           <div className="sb-hero-hud" aria-hidden="true"><span>Player energy</span><i /><i /><i /><i /></div>
         </section>
 
         <section className="sb-opening">
-          <div className="sb-opening-mark"><img src="/images/social-battery/logo/social-battery-black.jpg" alt="Social Battery" /></div>
+          <div className="sb-opening-mark"><img src="/social-battery/logo/social-battery-black.jpg" alt="Social Battery" /></div>
           <div className="sb-opening-copy">
             <span>Brand identity / Packaging / Campaign world</span>
             <h1>Energy became<br />a <em>power up.</em></h1>
@@ -4135,7 +4245,7 @@ function SocialBatteryPage() {
           </header>
           <div className="sb-identity-grid">
             <figure>
-              <img src="/images/social-battery/logo/social-battery-black.jpg" alt="Social Battery pixel wordmark in black" loading="lazy" />
+              <img src="/social-battery/logo/social-battery-black.jpg" alt="Social Battery pixel wordmark in black" loading="lazy" />
               <figcaption><span>Primary wordmark</span><span>Pixel built / Screen native</span></figcaption>
             </figure>
             <div className="sb-type-notes">
@@ -4153,6 +4263,15 @@ function SocialBatteryPage() {
           <div className="sb-charge-bar" aria-label="Social Battery fully charged"><i /><i /><i /><i /><i /><i /><i /><i /></div>
         </section>
 
+        <figure className="sb-campaign-drop sb-drop-exit">
+          <img src="/social-battery/campaign/exit-status.png" alt="Exit sign connected to a neon cable with the message Exit status temporarily unavailable" loading="lazy" decoding="async" />
+          <figcaption className="sb-drop-copy">
+            <span>Social Battery / After hours</span>
+            <h3>The plan is<br />still <em>on.</em></h3>
+            <p>A visual language for the moment between almost cancelling and showing up anyway.</p>
+          </figcaption>
+        </figure>
+
         <section className="sb-flavors">
           <header className="sb-reveal"><span>Packaging system / 03</span><h2>Four flavors.<br />Four charge modes.</h2><p>The complete supplied label artwork remains the source of truth. Each flavor changes color while the battery architecture, information grid and pixel voice stay locked.</p></header>
           <div className="sb-label-grid">
@@ -4166,14 +4285,45 @@ function SocialBatteryPage() {
           </div>
         </section>
 
-        <section className="sb-world sb-world-studio">
-          <header className="sb-reveal"><span>Product studies / 04</span><h2>Let the pack<br />hold the frame.</h2><p>Bright light, accurate scale and very little else. The quieter the scene becomes, the more clearly the battery structure does its work.</p></header>
-          {gallery(socialBatteryMockups, 'sb-gallery-studio')}
-        </section>
+        <figure className="sb-campaign-drop sb-drop-show-up">
+          <img className="sb-drop-character" src="/social-battery/campaign/social-battery-character.png" alt="Social Battery star character" loading="lazy" decoding="async" />
+          <img src="/social-battery/campaign/just-show-up.png" alt="Social Battery creative with the message No jitters. No big speech. Just show up." loading="lazy" decoding="async" />
+        </figure>
+
+        <figure className="sb-film-layer sb-film-layer-one">
+          <div className="sb-film-media"><video className="sb-campaign-video" data-src="/social-battery/films/sb00o0.mp4" poster="/social-battery/films/sb00o0-poster.jpg" muted loop playsInline preload="none" aria-label="Social Battery campaign film 01" /><figcaption><span>Film / 01</span><span>The plan arrives</span></figcaption></div>
+          <div className="sb-film-copy"><span>Incoming plan</span><h3>A plan lands.<br />The battery answers.</h3><p>Motion turns the social promise into a live moment. The invitation arrives, the character chooses yes and the night moves forward.</p></div>
+        </figure>
+
+        <figure className="sb-campaign-drop sb-drop-plan">
+          <img src="/social-battery/campaign/dont-kill-the-plan.png" alt="Social Battery character holding Cancel above Plan with the message Don’t kill the plan." loading="lazy" decoding="async" />
+        </figure>
+
+        <figure className="sb-film-layer sb-film-layer-two">
+          <div className="sb-film-media"><video className="sb-campaign-video" data-src="/social-battery/films/sbpop.mp4" poster="/social-battery/films/sbpop-poster.jpg" muted loop playsInline preload="none" aria-label="Social Battery campaign film 02" /><figcaption><span>Film / 02</span><span>The signal switches on</span></figcaption></div>
+          <div className="sb-film-copy"><span>Signal found</span><h3>The signal<br />takes over.</h3><p>Glitch, pixel light and the wordmark move as one system. It feels native to the feed because motion belongs to the identity.</p></div>
+        </figure>
+
+        <figure className="sb-campaign-drop sb-drop-caffeine">
+          <img src="/social-battery/campaign/clean-caffeine.png" alt="Social Battery creative with the message Clean caffeine for the 8:30 decision." loading="lazy" decoding="async" />
+          <figcaption className="sb-caffeine-copy">
+            <span>Decision mode / 08:30</span>
+            <h3>Clean charge.<br /><em>Clear plan.</em></h3>
+            <p>Energy for the decision to stay in, step out or keep the night moving.</p>
+          </figcaption>
+        </figure>
+
+        <figure className="sb-film-layer sb-film-layer-three">
+          <div className="sb-film-media"><video className="sb-campaign-video" data-src="/social-battery/films/sfb.mp4" poster="/social-battery/films/sfb-poster.jpg" muted loop playsInline preload="none" aria-label="Social Battery campaign film 03" /><figcaption><span>Film / 03</span><span>What is in the battery</span></figcaption></div>
+          <div className="sb-film-copy"><span>Inside the charge</span><h3>Energy. Balance.<br />Backup.</h3><p>The formula becomes a machine people can read in seconds. Each ingredient has one clear role inside the charge.</p></div>
+        </figure>
 
         <section className="sb-application">
-          <header className="sb-reveal"><span>One application / 05</span><h2>One can.<br />One clear line.</h2><p>The subway application uses the product as the main object. No flavor wall, no repeated poster system, no visual noise.</p></header>
-          <figure><img src="/images/social-battery/generated/subway-light-v2.jpg" alt="Minimal Social Battery subway lightbox with one pink can and the Social Battery wordmark" loading="lazy" /><figcaption><span>Subway lightbox</span><span>Charged with intention</span></figcaption></figure>
+          <header className="sb-reveal"><span>One application / 06</span><h2>One bottle.<br />One clear line.</h2><p>The subway application gives the product one job: make Social Battery recognisable in a single glance.</p></header>
+          <figure>
+            <img src="/social-battery/generated/subway-light-v5-character.png" alt="Social Battery star character skateboarding across a Y2K subway lightbox" loading="lazy" decoding="async" />
+            <figcaption><span>Subway lightbox</span><span>Charged with intention</span></figcaption>
+          </figure>
         </section>
 
         <section className="sb-close">
@@ -4343,7 +4493,7 @@ const compactBrandConfigs = {
   millet: { tone:'millet', eyebrow:'Brand identity / Healthy snacking', thesis:'Wholesome energy made bright, modern and immediately approachable.', statement:'Goodness with appetite.', detail:'Millet 9 brings warmth and momentum to a nutrition led proposition, using an energetic identity system built for shelves, packs and everyday recognition.' }
 };
 
-const sasyaImages = Array.from({length:6},(_,index) => `/images/work/sasya/sasya-${String(index+1).padStart(2,'0')}.jpg`);
+const sasyaImages = Array.from({length:6},(_,index) => `/images/work/sasyaa/sasyaa-${String(index+1).padStart(2,'0')}.jpg`);
 
 function SasyaPage() {
   useEffect(() => {
@@ -4356,36 +4506,36 @@ function SasyaPage() {
   },[]);
   return (
     <>
-      <Seo title="Sasya Brand Identity and Plant Commerce | Modern Day" description="A floral brand identity, digital commerce system and living visual world for Sasya, an online destination for plants." path="/work/sasyaa" />
+      <Seo title="Sasyaa Brand Identity and Plant Commerce | Modern Day" description="A floral brand identity, digital commerce system and living visual world for Sasyaa, an online destination for plants." path="/work/sasyaa" />
       <Header />
       <main className="sasya-page">
         <section className="sasya-hero">
-          <img src={sasyaImages[0]} alt="Sasya plant store and flower identity" />
+          <img src={sasyaImages[0]} alt="Sasyaa plant store and flower identity" />
         </section>
-        <section className="case-opening-band sasya-opening"><span>Brand identity / Digital commerce</span><h1>Sasya</h1><p>A living identity for a digital plant store, built to make discovering, understanding and bringing home plants feel beautifully natural.</p></section>
+        <section className="case-opening-band sasya-opening"><span>Brand identity / Digital commerce</span><h1>Sasyaa</h1><p>A living identity for a digital plant store, built to make discovering, understanding and bringing home plants feel beautifully natural.</p></section>
         <section className="sasya-premise">
-          <span>Root idea / 01</span><div className="sasya-orbit"><img src={sasyaImages[1]} alt="Original Sasya heart petal flower symbol" /></div>
-          <div className="sasya-reveal"><h2>Growth became<br />the interface.</h2><p>Sasya sells plants online, but the proposition is larger than a product grid. We shaped an identity and commerce world that helps people choose confidently, care intelligently and build a lasting relationship with what they bring home.</p></div>
+          <span>Root idea / 01</span><div className="sasya-orbit"><img src={sasyaImages[1]} alt="Original Sasyaa heart petal flower symbol" /></div>
+          <div className="sasya-reveal"><h2>Growth became<br />the interface.</h2><p>Sasyaa sells plants online, but the proposition is larger than a product grid. We shaped an identity and commerce world that helps people choose confidently, care intelligently and build a lasting relationship with what they bring home.</p></div>
         </section>
         <section className="sasya-mark">
           <div className="sasya-mark-copy sasya-reveal"><span>Identity / 02</span><h2>Eight petals.<br />Infinite growth.</h2><p>The flower symbol is constructed from one repeated organic form. Its rhythm gives the mark recognition at a glance, while the open centre keeps it light, generous and alive.</p></div>
-          <div className="sasya-mark-stage"><img src={sasyaImages[5]} alt="Original Sasya logo and wordmark system" /></div>
+          <div className="sasya-mark-stage"><img src={sasyaImages[5]} alt="Original Sasyaa logo and wordmark system" /></div>
         </section>
         <section className="sasya-object">
-          <figure><img src={sasyaImages[1]} alt="Sasya flower mark and wordmark on a sculptural plant pot" loading="lazy" /></figure>
+          <figure><img src={sasyaImages[1]} alt="Sasyaa flower mark and wordmark on a sculptural plant pot" loading="lazy" /></figure>
           <div className="sasya-reveal"><span>Application / 03</span><h2>The mark belongs<br />among the leaves.</h2><p>Quiet enough for a sculptural pot. Distinct enough for a delivery box. The identity sits naturally beside the product instead of competing with it.</p></div>
         </section>
         <section className="sasya-commerce">
           <header className="sasya-reveal"><span>Commerce / 04</span><h2>Choose with<br />confidence.</h2><p>Plant care becomes part of the buying experience. Sunlight, watering and growth information are treated as primary product attributes, helping every customer find the right plant for the right place.</p></header>
-          <figure><img src={sasyaImages[2]} alt="Sasya online plant store shown on a laptop" loading="lazy" /></figure>
+          <figure><img src={sasyaImages[2]} alt="Sasyaa online plant store shown on a laptop" loading="lazy" /></figure>
           <div className="sasya-care"><span>Light</span><b>4 to 5 hours</b><span>Water</span><b>Every 7 days</b><span>Outcome</span><b>A better match</b></div>
         </section>
         <section className="sasya-palette">
-          <figure><img src={sasyaImages[4]} alt="Sasya botanical colour palette" loading="lazy" /></figure>
+          <figure><img src={sasyaImages[4]} alt="Sasyaa botanical colour palette" loading="lazy" /></figure>
           <div className="sasya-reveal"><span>Visual world / 05</span><h2>Colour sampled<br />from living things.</h2><p>Misted pear, almond cream, pebble path and vintage lichen create a palette that feels grown rather than selected. The result is calm enough for commerce and rich enough for storytelling.</p></div>
         </section>
         <section className="sasya-mobile">
-          <img src={sasyaImages[3]} alt="Sasya mobile identity on a phone among green surfaces" loading="lazy" />
+          <img src={sasyaImages[3]} alt="Sasyaa mobile identity on a phone among green surfaces" loading="lazy" />
           <div><span>Digital expression / 06</span><h2>A bloom<br />in your hand.</h2></div>
         </section>
         <section className="sasya-close">
@@ -4822,6 +4972,7 @@ function ModconSocialPage() {
 function Router() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/';
   if (path === '/') return <HomePage />;
+  if (path === '/pricing') return <PricingPage Seo={Seo} />;
   if (path === '/services') return <ServicesPage />;
   if (path === '/services/design') return <ServiceDetail type="design" />;
   if (path === '/services/digital') return <ServiceDetail type="digital" />;
@@ -4845,12 +4996,15 @@ function Router() {
   if (path === '/work/agartha-social') return <AgarthaSocialPage />;
   if (path === '/work/pandora') return <PandoraPage />;
   if (path === '/work/sasyaa') return <SasyaPage />;
+  if (path === '/work/ninety-north') return <NinetyNorthCase Header={Header} Seo={Seo} Arrow={Arrow} />;
+  if (path === '/work/slaab') return <SlaabCase Header={Header} Seo={Seo} Arrow={Arrow} />;
   const digitalStoryMatch = path.match(/^\/work\/(shriyasom|hera|sepal|briskev|vian-valley|restaurant-showcase|wilderness-retreat|orka)$/);
   if (digitalStoryMatch) return <DigitalStoryPage slug={digitalStoryMatch[1]} />;
   const compactBrandMatch = path.match(/^\/work\/(luma|millet)$/);
   if (compactBrandMatch) return <CompactBrandPage slug={compactBrandMatch[1]} />;
   if (path === '/about') return <AboutPage />;
   if (path === '/about/dharma-teja') return <FounderPage />;
+  if (path === '/careers') return <CareersPage />;
   if (path === '/contact') return <ContactPage />;
   if (path === '/studio') return <React.Suspense fallback={<main className="studio-loading">Opening Studio…</main>}><Studio /></React.Suspense>;
   return <NotFound />;

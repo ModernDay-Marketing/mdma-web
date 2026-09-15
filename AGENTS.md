@@ -590,6 +590,20 @@ DAT is a custom Digital exhibition for a spatial technology company. Modern Day 
 
 Preserve every supplied carousel at its original 4:5 ratio. Animated frames and embedded video slides must remain in motion. Visitors can let each sequence advance or choose an individual frame. Keep reels in their original format and audio, with deliberate playback controls. Present `https://deftntact.com/` as website work designed and built by Modern Day. Do not invent audience growth, engagement, leads, product performance, or commercial outcomes.
 
+## 7H. SLAAB identity exploration case study memory
+
+SLAAB, short for Surface Lab, is a surface visualization technology company. The case study is an identity exploration, not a selected or finalized brand identity. State clearly that the client did not select a final logo and never rename the four directions as final or alternate logos.
+
+Preserve the five routes and their original logic:
+
+1. An octagonal base cut into a bold angular S, expressing stability, structure and movement.
+2. Three stacked isometric prisms forming an S, expressing dimensional layering, comparison and visualization.
+3. A skewed slab container with a teal interruption through the L, using tension and connection to make the wordmark memorable.
+4. A rounded wordmark with a gradient surface bar above the double a, expressing a slab, depth, flow and precision.
+5. A complete sharp cut wordmark where the S, L and B feel engineered from slabs and both A forms contain square counters.
+
+Every route has its own mockup sequence. Keep those applications inside the corresponding route and preserve their presentation order. The later studies are evidence of how the ideas were tested across app icons, interfaces, social systems, spatial displays, objects, print and motion. Present every supplied frame at a useful size and original proportion. The page is mobile first and must dismantle the landscape presentation into one idea, image and explanation at a time. Do not embed the PDFs as small slides or invent approval, performance, adoption, or commercial outcomes.
+
 ## 8. Services architecture
 
 ### 8.1 Overview routes
@@ -627,6 +641,10 @@ Routes:
 - `/about`
 - `/about/dharma-teja`
 
+Modern Day was founded independently in Hyderabad in 2022. The About page uses two meaningful studio facts: more than 85 companies helped, and the 2022 founding year. Do not restore campaign view counts, completed mandate counts, or “Two practices. One standard.” as statistic cards.
+
+The founder portrait caption, “How we show up” heading, and “Start with the business change” prompt are intentional reading hierarchy, not utility captions. Keep them comfortably legible on desktop and mobile.
+
 Founder positioning:
 
 - Dharma Teja is adventurous, hands on, demanding of the work, and intensely curious.
@@ -641,6 +659,16 @@ Founder images live in `public/images/founder`.
 ---
 
 ## 10. Contact experience
+
+### Public fee guide
+
+`/pricing` is a public fee guide for prospective clients, made public at Dharma’s request on 15 September 2026 so visitors can assess fit before enquiring. Include it in main navigation, the footer and sitemap. Allow search indexing; do not restore the former noindex directive or response header. Its custom page and scoped styles live in `src/pricing-page.jsx` and `src/pricing-page.css`.
+
+Owner supplied fees (15 September 2026): logo design ₹1,00,000 to ₹1,50,000 per project; complete branding approximately ₹1,80,000; packaging ₹1,00,000 to ₹2,00,000 per project; social media ₹80,000 to ₹3,00,000 per month; Dharma Teja shoots ₹80,000 to ₹1,20,000 per day; lead photographer or cinematographer ₹40,000 to ₹50,000 per day; iPhone shoots ₹15,000 per day. Monthly social and daily shoot billing were explicitly confirmed.
+
+The Design introduction links to Sleeping Tiger with “Enter the world of Sleeping Tiger.” Keep that link beside the whole Design introduction, not below Packaging. Digital links to DAT. Production links to Malle. Keep the Malle scope truthful as photography only. Explain what each fee covers; describe editing briefly as clean and restrained, with scope and fee agreed in the brief.
+
+Do not publish individual poster, creative or carousel fees. Keep Design, Digital and Production distinct. Position social media around the whole agreed presence and meaningful impact. Do not invent editing fees, guaranteed sales, unlimited deliverables, tax treatment or commercial terms. Confirm precise inclusions in the project proposal.
 
 Route: `/contact`
 
